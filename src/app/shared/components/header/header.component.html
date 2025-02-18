@@ -1,0 +1,37 @@
+
+<header class="header">
+
+    <div class="header__contenedor">
+
+        @if(showNotify){
+
+            <div class="notify" [class]="{'hiden':closed} "  >
+                <button (click)="closeNotify()" class="btn-close" >X</button>
+                <p class="notify__text">
+                    Has sido el afortunado de obtener un descuento del {{ (usr.descuento!.descuento)*100 }}% en nuestra tienda.
+                </p>
+            </div>
+        }            
+        <!-- barra -->
+        <app-nav-bar></app-nav-bar>
+        
+        <!-- modelo -->
+        <div class="modelo">
+            <h1 class="modelo__nombre">Modelo VAI</h1>
+            <p class="modelo__descripcion">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Amet, suscipit, facere odit placeat molestiae officiis
+                recusandae sapiente neque ipsam quisquam totam non beatae
+                ab nisi consectetur quos, itaque alias tenetur!
+            </p>
+            <p class="modelo__precio">
+                $399
+            </p>
+
+            <a class="modelo__enlace" routerLink="/clientes/instrumento">Ver Producto</a>
+        </div>
+
+    </div>
+    <!-- modelo-img -->
+    <img class="header__producto" src="assets/header_guitarra.png" alt="imagen gitarra">
+</header>

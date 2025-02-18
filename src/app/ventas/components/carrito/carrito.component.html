@@ -1,0 +1,84 @@
+<div class="contenedor">
+    <app-nav-bar></app-nav-bar>
+    <div id="carrito" class="bg-white p-3">
+        @if(showNotify){
+
+            <div class="notify" [class]="{'hiden':closed} "  >
+                <button (click)="closeNotify()" class="btn-close" >X</button>
+                <p class="notify__text">
+                    Has sido el afortunado de obtener un descuento del {{ (usr.descuento!.descuento)*100 }}% en nuestra tienda.
+                </p>
+            </div>
+        }         
+        @if(cart.length === 0){
+            <p class="text-center">El carrito esta vacio</p>
+        }@else{
+    
+            <table class="w-100 table">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (prod of cart; track $index) {
+    
+                            <tr id="carI{{$index}}">
+                                <td>
+                                    <img class="img-fluid" [src]="prod.producto.imagen" alt="imagen {{prod.producto.nombre}}" />
+                                </td>
+                            <td>{{prod.producto.nombre}}</td>
+                            <td class="fw-bold">
+                                {{prod.precio}}
+                            </td>
+                            <td class="flex align-items-start gap-4">
+                                <button
+                                (click)="decreaseQuantity(prod.producto._id)"
+                                    type="button"
+                                    class="btn btn-dark"
+                                >
+                                    -
+                                </button>
+                                    {{prod.cantidad}}
+                                <button
+                                    (click)="increaseQuantity(prod.producto._id)"
+                                    type="button"
+                                    class="btn btn-dark"
+                                >
+                                    +
+                                </button>
+                            </td>
+                            <td>
+                                <button
+                                    (click)="removeFromCart(prod.producto._id)"
+                                    class="btn btn-danger"
+                                    type="button"
+                                >
+                                    X
+                                </button>
+                            </td>
+                        </tr>
+                    }
+    
+                </tbody>
+            </table>
+    
+            <p class="text-end">Subtotal: <span class="fw-bold">{{carTotal}}</span></p>
+            <p class="text-end">Descuento: <span class="fw-bold">{{ (usr.descuento!.descuento)*100 || 0 }}%</span></p>
+            <p class="text-end">Total pagar: <span class="fw-bold">{{carTotal*(1-usr.descuento!.descuento)}}</span></p>
+            <button 
+            (click)="clearCart()"
+            class="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+            
+        }
+        <div class="centrar-boton">
+            <div #paypal ></div>
+            <!-- <button (click)="detalleVenta()" >Venta</button> -->
+        </div>
+    </div>
+            
+</div>

@@ -1,0 +1,39 @@
+<!-- <div class="notify">
+    <p class="notify__text">
+        Has sido el afortunado de obtener un descuento del 0% en nuestra tienda.
+    </p>
+</div> -->
+
+<app-header></app-header>
+
+<section>
+    <app-filters (filtrados)="getFiltrados($event)" ></app-filters>
+</section>
+
+@defer {
+    <main class="bg-blanco">
+        <div class="contenedor productos">
+            <h2 class="productos__title">{{ categoria !== '' ? categoria : 'Productos nuevos' }}</h2>
+            @if (productosFilt.length<=0) {
+                <app-slider-productos [productos]="productosNvs"></app-slider-productos>
+            }@else {
+                <app-slider-productos [productos]="productosFilt"></app-slider-productos>
+            }
+        </div>
+    </main>
+}
+    
+<app-hero-nosotros></app-hero-nosotros>
+
+@defer(on viewport) {
+<section class="bg-blanco">
+    <div class="contenedor productos">
+        <h2 class="productos__title">Más vendidos</h2>
+        <app-slider-productos [productos]="productosNvs"></app-slider-productos>
+    </div>
+</section>
+
+<app-footer></app-footer>
+}@placeholder {
+<pre>load...</pre>
+}

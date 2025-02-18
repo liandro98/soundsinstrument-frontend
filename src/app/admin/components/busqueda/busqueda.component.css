@@ -1,0 +1,33 @@
+.busqueda-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 17vh; 
+  }
+
+  
+.adm__title {
+  margin: 0;
+  color: var(--azul);
+  padding-top: 3rem;
+}
+
+  form {
+    display: flex;
+  }
+  
+  input {
+    padding: 0.1rem;
+    font-size: 1.6rem;
+    width: 40rem;
+  }
+  
+  button {
+    font-size: medium;
+    background-color: rgb(0, 137, 216);
+    border: none;
+    border-radius: 0.4rem;
+    width: 9rem;
+    height: 4rem;
+    margin-left: 3rem;
+  }

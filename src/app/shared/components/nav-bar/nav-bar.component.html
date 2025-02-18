@@ -1,0 +1,52 @@
+<nav class="nav">
+
+    <div class="hamburger">
+        <button 
+            class="hamburger__btn"
+            (click)="onShowMenu()"
+        >
+            <img src="assets/menu.svg" alt="menu icon">
+        </button>
+    </div>
+
+    <div class="nav__logo">
+        <a routerLink="/clientes/inicio"><img src="/assets/Logo.png" alt="Logo"></a>
+    </div>
+
+
+    <div class="nav__links" [ngClass]="{'nav__links--show':showMenu}">
+        <a class="nav__enlace" routerLink="/clientes/inicio" routerLinkActive="active-link" >Inicio</a>
+        <a class="nav__enlace" routerLink="/clientes/instrumentos" routerLinkActive="active-link" >Instrumentos</a>
+        <a class="nav__enlace" routerLink="/nosotros" routerLinkActive="active-link" >Nosotros</a>
+        @if (getRol()==='ADMTlN') {
+            <a class="nav__enlace" routerLink="/administracion/" routerLinkActive="active-link" >Gestionar productos</a>
+        }
+        @if (usr) {
+            <div class="profile-menu">
+                <span class="profile-name">{{ usr.nombre }}</span> <!-- Muestra el nombre del usuario -->
+                <div class="dropdown-menu">
+                    <a routerLink="/auth/perfil" class="dropdown-item">Ver Perfil</a>
+                    <a (click)="logOut()" class="dropdown-item">Cerrar Sesión</a>
+                </div>
+            </div>
+        }@else {
+            <a class="nav__enlace" routerLink="/auth" >Iniciar Sesión</a>
+        }
+        <div class="hamburger--close">
+            <button 
+                class="hamburger__btn"
+                (click)="onShowMenu()"
+            >
+                <img src="assets/close.svg" alt="menu icon">
+            </button>
+        </div>
+    </div>
+
+    <div class="nav__cart">
+        <a routerLink="/ventas/cart">
+            <img src="assets/iconCarrito.svg" alt="icono carrito">
+        </a>
+    </div>
+
+
+</nav>

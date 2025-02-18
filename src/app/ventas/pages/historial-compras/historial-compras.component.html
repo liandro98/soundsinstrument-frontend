@@ -1,0 +1,70 @@
+<div class="contenedor">
+    <app-nav-bar></app-nav-bar>
+</div>
+
+<div class="contenido contenedor">
+    <!-- Contenedor izquierda: filtros -->
+    <div class="izquierda-column">
+        <div class="opciones-filtros">
+            <form [formGroup]="filtroForm" (ngSubmit)="aplicarFiltros()">
+                <div class="opciones-filtros">
+                    <h4>Filtros:</h4>
+                    <label>
+                        Fecha:
+                        <input formControlName="creadoEn" type="date" placeholder="fecha">
+                    </label>
+
+                    <h4>Filtrar por Total:</h4>
+                    <label>
+                        Total Mínimo:
+                        <input formControlName="precioMin" type="number" placeholder="Precio mínimo">
+                    </label>
+                    <label>
+                        Total Máximo:
+                        <input formControlName="precioMax" type="number" placeholder="Precio máximo">
+                    </label>
+
+                    <h4>Nombre del Producto:</h4>
+                    <label>
+                        <input formControlName="nombre" type="text" placeholder="Buscar por nombre">
+                    </label>
+
+                    <button class="btn-Original" type="submit">Aplicar Filtros</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Contenedor derecha: tarjetas -->
+    <div class="derecha-column">
+        <h2>Historial de Ventas</h2>
+        @if (onders.length>0) {
+
+        @for (item of onders; track $index) {
+        <div class="perfil-card">
+            <!-- Sección del historial de compras -->
+            <div class="orden-item">
+                <p><strong>Fecha:</strong> {{ item.creadoEn | date }}</p>
+                <p><strong>Total:</strong> ${{ item.total }}</p>
+                <p><strong>Estado:</strong> {{ item.estado }}</p>
+
+                <div *ngFor="let producto of item.productos" class="producto-item">
+                    <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="producto-imagen" />
+                    <pre>Nombre: {{producto.nombre}}</pre>
+                    <pre>Descripción: {{producto.descripcion}}</pre>
+                    <pre>Cantidad: {{producto.cantidad}}</pre>
+                    <pre>Precio: ${{producto.precio.toFixed(2)}}</pre>
+                    <pre>Subtotal: ${{(producto.cantidad * producto.precio).toFixed(2)}}</pre>
+                </div>
+            </div>
+        </div>
+        }
+        <pre class="total"><strong>Total: </strong>${{ (total).toFixed(2) }}</pre>
+        <button class="btn-Original" (click)="masElements()">Ver Más</button>
+        }@else {
+            <p class="no-compras">No hay reportes de ventas!</p>
+        }
+
+    </div>
+</div>
+
+<app-footer></app-footer>

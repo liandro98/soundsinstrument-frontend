@@ -1,0 +1,9 @@
+.bg-blanco {
+    padding: 2.5rem 1rem;
+    background-color: var(--blanco);
+}
+
+.productos__title {
+    color: var(--azul);
+}
+

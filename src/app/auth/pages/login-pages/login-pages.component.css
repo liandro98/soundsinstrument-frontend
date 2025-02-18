@@ -1,0 +1,164 @@
+.space {
+  height: 50dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.space--nvProd {
+  height: 100%;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.login__contenedor{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+@media(min-width:1024px) {
+  .login__contenedor {
+    width: 50%;
+  }
+}
+
+.centrar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.login-container {
+  background-color: var(--blanco);
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--azul);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--azul);
+}
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="file"] {
+  padding: 0 0 3rem 0;
+}
+
+.drag-drop-area {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.drag-drop-area.dragging {
+  border-color: #009688;
+  background-color: #e0f7fa;
+}
+
+
+.login-container p {
+  text-align: center;
+  margin-top: 20px;
+  color:var(--azul);
+}
+
+.login__nav {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.7rem;
+}
+
+.login__nav a {
+  display: inline-block;
+  padding: 1rem 0;
+  color: var(--naranja);
+  text-decoration: none;
+  width: auto;
+}
+
+.login__nav a:last-of-type {
+  text-align: right;
+}
+
+.btn__cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.btn-Original--ch {
+  margin: 2rem 0 0 0;
+  padding: .5rem .4rem;
+  background-color: transparent;
+  color: var(--naranja);
+  border-color: var(--naranja);
+}
+
+.btn-Original--ch:hover {
+  background-color: var(--naranja);
+  color: var(--blanco);
+}
+
+.p-message-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cantidad-form, .estante-form {
+  display: grid;
+}
+
+@media(min-width:768px) {
+  .cantidad-form {
+    grid-template-columns: 1fr 1fr 3fr;
+    gap:2rem;
+  }
+
+  .estante-form {
+    grid-template-columns: repeat(2,1fr);
+    gap:2rem;
+  }
+}
+

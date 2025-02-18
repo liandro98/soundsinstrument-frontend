@@ -1,0 +1,72 @@
+.hero {
+    background-image: 
+    linear-gradient(to right, rgb(0 0 0 /.65), rgb(0 0 0 /.65)),
+    url(/assets/blog_3.jpg);
+    padding: 10rem 0;
+    background-size: cover;
+    background-position: 50%;
+
+}
+
+@media (min-width:768px) {
+    .hero__grid {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        column-gap: 2rem;
+    }
+}
+
+.hero__contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (min-width:768px) {
+    .hero__contenido {
+        grid-column: 1/2;
+    }
+}
+
+.hero__texto {
+    color: var(--blanco);
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+.hero__enlace {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border: 2px solid var(--blanco);
+    padding: 1rem 5rem;
+    color: var(--blanco);
+    margin-top: 2rem;
+    max-width: 30rem;
+    transition-property: background-color;
+    transition-duration: .3s;
+}
+
+
+.hero__enlace:hover {
+    background-color: var(--naranja);
+}
+
+.hero__enlace-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width:768px) {
+    .hero__enlace-cont{
+        grid-column: 2/3;
+    }
+
+    .hero__enlace {
+        margin: 0;
+    }
+}

@@ -1,0 +1,83 @@
+.producto {
+    position: relative;
+    width: 95%;
+    border-radius: 1rem;
+    background-color: var(--plata);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.producto:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.producto__imagen {
+    height: 27rem; /* Establece un alto fijo para que la imagen de fondo se ajuste */
+    background-image: url('/assets/guitarra_04.jpg'); /* Aquí va la ruta de la imagen */
+    background-size: cover; /* Asegura que la imagen cubra completamente el contenedor */
+    background-position: center; /* Centra la imagen en el contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+/* El resto del CSS para el contenido y la transición */
+.producto__contenido {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--blanco);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.producto:hover .producto__contenido {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.producto__nombre {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    color: var(--blanco);
+}
+
+.producto__descripcion {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: var(--gris-claro);
+}
+
+.producto__precio {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.producto__enlace {
+    display: inline-block;
+    background-color: transparent;
+    padding: 0.8rem 3rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border: .1rem solid var(--blanco);
+    border-radius: 1rem;
+    color: var(--blanco);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.producto__enlace:hover {
+    background-color: var(--naranja);
+}

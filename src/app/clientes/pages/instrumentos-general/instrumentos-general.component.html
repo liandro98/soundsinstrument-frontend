@@ -1,0 +1,52 @@
+<div class="contenedor">
+  <app-nav-bar></app-nav-bar>
+</div>
+
+<div class="contenido contenedor">
+  <!-- Contenedor izquierda: filtros -->
+  <div class="izquierda-column">
+    <div class="opciones-filtros">
+      <form [formGroup]="filtroForm" (ngSubmit)="aplicarFiltros()">
+        <div class="opciones-filtros">
+          <h4>Filtros:</h4>
+          <label>
+            Categoría:
+            <select formControlName="categoria">
+              <option value="">Selecciona una categoría</option>
+              @for (categoria of categorias; track $index) {
+              <option [value]="categoria">{{categoria}}</option>
+              }
+
+            </select>
+          </label>
+
+          <h4>Filtrar por Precio:</h4>
+          <label>
+            Precio Mínimo:
+            <input formControlName="precioMin" type="number" placeholder="Precio mínimo">
+          </label>
+          <label>
+            Precio Máximo:
+            <input formControlName="precioMax" type="number" placeholder="Precio máximo">
+          </label>
+
+          <h4>Nombre:</h4>
+          <label>
+            <input formControlName="nombre" type="text" placeholder="Buscar por nombre">
+          </label>
+
+          <button class="btn-Original" type="submit">Aplicar Filtros</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Contenedor derecha: tarjetas -->
+  <div class="derecha-column">
+    <h2>Productos</h2>
+    <app-shared-listado-productos [productos]="products"></app-shared-listado-productos>
+    <button class="btn-Original" (click)="masComents()">Ver Más</button>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

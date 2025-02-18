@@ -1,0 +1,60 @@
+
+
+.formulario-contenedor {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.formulario card {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+
+
+.mat-mdc-card {
+  background-color: var(--blanco);
+  padding: 1rem;
+}
+
+
+.mat-stepper-vertical,
+.mat-stepper-horizontal {
+  background-color: var(--blanco);
+  border-radius: .5rem;
+
+
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.f-size {
+  font-size: 2rem;
+}
+
+.registro__title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--azul);
+}
+
+.mat-step-icon-selected {
+  background-color: var(--naranja);
+}
+
+
+input  {
+  font-size: 1.8rem !important;
+}
+
+.btns {
+  gap: 3rem;
+}

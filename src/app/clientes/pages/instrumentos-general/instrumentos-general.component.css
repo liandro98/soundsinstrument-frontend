@@ -1,0 +1,78 @@
+.contenido {
+  display: grid;
+  grid-template-columns: .7fr 1fr 1fr;
+  column-gap: .5rem;
+}
+
+/* Left column (filters) */
+.izquierda-column {
+  grid-column: 1/2;
+  padding: 1.5rem;
+  background-color: var(--blanco);
+  border-radius: .5rem;
+  width: 100%;
+}
+
+
+.opciones-filtros h4 {
+  font-size: 1.2em;
+  color: var(--azul);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Estilos para cada filtro */
+.opciones-filtros label {
+  display: block;
+  font-size: 1em;
+  color: var(--azul);
+  margin-bottom: 5px;
+}
+
+.opciones-filtros select,
+.opciones-filtros input[type="number"],
+.opciones-filtros input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: border 0.3s;
+}
+
+.opciones-filtros select:focus,
+.opciones-filtros input[type="number"]:focus,
+.opciones-filtros input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+
+
+
+/* Right column (products) */
+.derecha-column {
+  grid-column: 2/4;
+  background-color: var(--blanco);
+  border-radius: .5rem;
+  padding: 2rem;
+}
+
+.derecha-column h2 {
+  font-size: 1.5em;
+  color: var(--azul);
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.productos-modulo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+.derecha-column button{
+  margin-top: 2rem;
+}

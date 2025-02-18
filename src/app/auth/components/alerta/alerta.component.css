@@ -1,0 +1,13 @@
+/* Asegúrate de aplicar este estilo en tu archivo de CSS global o en el estilo del componente */
+.center-container {
+    display: flex;
+    flex-direction: column; /* Ordena los elementos verticalmente */
+    align-items: center;    /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh;           /* Ocupa el 100% de la altura de la ventana */
+    text-align: center;      /* Centra el texto dentro de los elementos */
+}
+
+.btn-Original {
+    width: 20rem;
+}

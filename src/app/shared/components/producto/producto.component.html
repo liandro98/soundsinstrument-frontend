@@ -1,0 +1,17 @@
+<div class="producto">
+    
+    <div class="producto__imagen" [ngStyle]="{'background-image':'url'+'('+getProducto().imagen+')'}" >
+        <!-- <img src="/assets/guitarra_04.jpg" alt="imagen producto"> -->
+    </div>
+
+    <div class="producto__contenido">
+        <h3 class="producto__nombre">{{getProducto().nombre}}</h3>
+        <p class="producto__descripcion">
+            {{getProducto().descripcion}}
+        </p>
+        <p class="producto__precio">
+            ${{getProducto().precio}}
+        </p>
+        <a class="producto__enlace" routerLink="/clientes/instrumento/{{getProducto()._id}}">Ver Producto</a>
+    </div>
+</div><!-- .producto -->

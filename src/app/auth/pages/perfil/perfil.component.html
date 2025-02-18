@@ -1,0 +1,58 @@
+@if(usuario){
+<div class="bg-blanco">
+
+
+    <div class="perfil-container">
+        <div class="perfil-card">
+            <a class="logo" routerLink="/clientes/inicio">
+                <h2>SoundTain-<span>Instruments</span></h2>
+            </a>
+            <div class="perfil-header">
+                <img src="/assets/person.svg" alt="Foto de Perfil" class="perfil-imagen" />
+                <h2>{{ usuario.nombre }}</h2>
+                <p class="perfil-rol">{{ usuario.apellido }}</p>
+            </div>
+            <div class="perfil-info">
+                <p><strong>Email:</strong> {{ usuario.email }}</p>
+                <p><strong>Teléfono:</strong> {{ usuario.phone }}</p>
+                <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+            </div>
+            @if (getAutorized()) {
+                <a class="btn-Original" routerLink="/auth/edit-perfil">Editar Perfil</a>
+            }@else {
+                <div class="btns">
+                <a class="btn-Original" routerLink="/auth/edit-perfil">Editar Perfil</a>
+                <a class="btn-Original-azul" routerLink="/administracion/historial-ventas">Reportes de ventas</a>
+                </div>
+            }
+            
+
+        </div>
+        @if(historialCompras.length > 0) {
+        <div class="perfil-card">
+
+            <!-- Sección del historial de compras -->
+            <div class="historial-compras">
+                <h3>Historial de Compras</h3>
+                <div *ngFor="let orden of historialCompras" class="orden-item">
+                    <p><strong>Fecha:</strong> {{ orden.creadoEn | date }}</p>
+                    <p><strong>Total:</strong> ${{ orden.total }}</p>
+                    <p><strong>Estado:</strong> {{ orden.estado }}</p>
+
+                    <div *ngFor="let producto of orden.productos" class="producto-item">
+                        <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="producto-imagen" />
+                        <pre>Nombre: {{producto.nombre}}</pre>
+                        <pre>Descripción: {{producto.descripcion}}</pre>
+                        <pre>Cantidad: {{producto.cantidad}}</pre>
+                        <pre>Precio: ${{producto.precio.toFixed(2)}}</pre>
+                        <pre>Subtotal: ${{(producto.cantidad * producto.precio).toFixed(2)}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        } @else {
+        <p class="no-compras">No ha realizado compras!</p>
+        }
+    </div>
+</div>
+}

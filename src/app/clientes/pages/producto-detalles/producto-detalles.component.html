@@ -1,0 +1,76 @@
+<!-- Barra de navegacion -->
+<div class="prod-detalle__contenedor">
+    <app-nav-bar></app-nav-bar>
+
+    <!-- prod principal -->
+    <div class="btn__cont">
+        <a class="btn-Original--ch" routerLink="/clientes/instrumentos">Volver</a>
+    </div>
+    <div class="container">
+        <div class="image-section">
+            <div class="product-images">
+                <img [src]="productoIMG"
+                    style="width: 400px; height: 400px;" alt="Imagen principal">
+            </div>
+        </div>
+        <div class="product-details">
+            <h1 class="product-title">{{producto.nombre}}</h1>
+            <div class="product-price">$ {{producto.precio}} MXN</div>
+            <div class="product-description">
+                <!-- <p><strong>Lo que tienes que saber de este producto:</strong></p>
+                <ul>
+                    <li>Orientación de la mano: Diestro</li>
+                    <li>Tapa de arce, acabado laqueado.</li>
+                    <li>Forma del cuerpo: classic.</li>
+                    <li>Tiene 6 cuerdas de cobre de metal.</li>
+                </ul> -->
+                <p>{{producto.descripcion}}</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="buy-section">
+                <div class="quantity-section">
+                    <label for="cantidad" class="quantity-label">Cantidad:</label>
+                    <input #cantidad type="number" id="cantidad" name="cantidad" min="1" max="50" value="1"
+                        class="quantity-input">
+                </div>
+                <div class="units-available">Disponibles: {{producto.cantidad}} unidades</div>
+                <!-- <a href="#" class="buy-button">Comprar ahora</a> -->
+                <button class="btn-Original" (click)="aggCart()">Agregar al carrito</button>
+                <div class="card">
+                    <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="related-products-section">
+        <h2 class="productos__title">Productos relacionados</h2>
+        <app-slider-productos [productos]="productosFilt" ></app-slider-productos>
+    </div>
+    @defer () {
+        <div class="comments-section">
+            <h2 class="coments__title">Comentarios</h2>
+            <section class="comentarios-lists" >
+                <app-comentario [producto]="getProd()" ></app-comentario>
+            </section>
+            <br>
+            <div class="rating-section">
+                <label class="rating-label">Califica este producto:</label>
+                <div class="star-rating">
+                    <span class="star" [ngClass]="{'selected':calif>=1}" (click)="selectStar(1)">&#9733;</span>
+                    <span class="star" [ngClass]="{'selected':calif>=2}" (click)="selectStar(2)">&#9733;</span>
+                    <span class="star" [ngClass]="{'selected':calif>=3}" (click)="selectStar(3)">&#9733;</span>
+                    <span class="star" [ngClass]="{'selected':calif>=4}" (click)="selectStar(4)">&#9733;</span>
+                    <span class="star" [ngClass]="{'selected':calif>=5}" (click)="selectStar(5)">&#9733;</span>
+                </div>
+            </div>
+            <textarea #commentInput class="comment-textarea" rows="4" placeholder="Escribe tu comentario..."></textarea>
+            <button class="btn-Original" (click)="onSubmitCmts()">Publicar comentario</button>
+        </div>
+    }
+    
+    @defer () {
+        <app-footer></app-footer>
+    }
+</div>

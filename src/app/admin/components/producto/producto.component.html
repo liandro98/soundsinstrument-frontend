@@ -1,0 +1,82 @@
+<div class="space--nvProd">
+  <div class="login__contenedor">
+    <div class="login-container">
+      <h2>Registrar Producto</h2>
+      <div class="card">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+      </div>
+      <form class="nv-form" [formGroup]="productoFormulario">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Introduce el nombre del producto">
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Introduce una descripción"></textarea>
+
+        <div class="cantidad-form">
+          <div class="campo">
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" formControlName="precio" placeholder="Introduce el precio">
+          </div>
+
+          <div class="campo">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" formControlName="cantidad"
+              placeholder="Introduce la cantidad disponible">
+
+          </div>
+
+          <label>
+            Categoría:
+            <select formControlName="categoria">
+              <option value="">Selecciona una categoría</option>
+              @for (categoria of categorias; track $index) {
+              <option [value]="categoria">{{categoria}}</option>
+              }
+
+            </select>
+          </label>
+
+        </div>
+
+        <div class="estante-form">
+          <div class="campo">
+            <label for="estante">Estante</label>
+            <input type="text" id="estante" formControlName="estante" placeholder="Introduce el estante donde se ubica">
+
+          </div>
+
+          <div class="campo">
+            <label for="seccionEstante">Sección del Estante</label>
+            <input type="text" id="seccionEstante" formControlName="seccionEstante"
+              placeholder="Introduce la sección del estante">
+
+          </div>
+
+        </div>
+
+        @if (!edit) {
+        <div class="campo">
+          <label for="imagen">Imagen</label>
+          <input type="file" id="imagen" (change)="onFileSelected($event)" accept="image/*">
+        </div>
+        }
+
+        <div>
+          @if (!edit) {
+          <input (click)="onSubmit()" class="btn-Original" type="submit" value="Guardar Producto">
+          }@else {
+          <input (click)="onEdit()" class="btn-Original" type="submit" value="Guardar Cambios">
+
+          }
+        </div>
+      </form>
+      <nav class="login__nav">
+        <a routerLink="/administracion/busqueda"><strong>Ver listado de productos</strong></a>
+        <a routerLink="/productos/ayuda"><strong>¿Necesitas ayuda?</strong></a>
+      </nav>
+      <div class="btn__cont">
+        <a class="btn-Original--ch" routerLink="/administracion/busqueda">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</div>

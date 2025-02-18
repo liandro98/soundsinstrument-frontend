@@ -1,0 +1,9 @@
+<h2 class="adm__title" >Administrar stock</h2>
+<div class="busqueda-container">
+    <form [formGroup]="busquedaForm" (ngSubmit)="onSubmit()">
+      <input type="search" formControlName="nombre" placeholder="Buscar...">
+      <button type="submit">Buscar</button>
+    </form>
+</div>
+
+<app-listado [prods]="productos"></app-listado>

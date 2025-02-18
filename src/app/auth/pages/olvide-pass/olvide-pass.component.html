@@ -1,0 +1,21 @@
+<div class="space">
+
+  <div class="login__contenedor">
+    <!-- Login contendor -->
+    <div class="centrar">
+      <div class="login-container">
+        <h2>Recupera tu cuenta en <strong>SoundTain-Instruments</strong></h2>
+        <form [formGroup]="recuForm" (ngSubmit)="onSubmit()">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" id="email" formControlName="email" placeholder="Introduce tu correo">
+
+          <input class="btn-Original" type="submit" [disabled]="recuForm.invalid" value="Recuperar">
+        </form>
+        <div class="btn__cont">
+          <a class="btn-Original--ch" routerLink="/clientes/inicio">Volver</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

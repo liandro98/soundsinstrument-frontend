@@ -1,0 +1,33 @@
+<div class="cont-boton">
+  <button id="btn-Agregar" class="btn-Original" (click)="crearProducto()"><strong>Agregar Producto!</strong></button>
+</div>
+
+<table>
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Nombre del Producto</th>
+        <th>Tipo</th>
+        <th>Costo</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of prods; track $index) {
+        <tr>
+        <td><img [src]="product.imagen" alt="imagen del producto {{product.nombre}}"></td>
+        <td>{{ product.nombre }}</td>
+        <td>{{ product.categoria }}</td>
+        <td>{{ product.precio| currency }}</td>
+        <td>{{ product.cantidad }}</td>
+        <td id="col-acciones" >
+          <div class="btns-c" >
+            <button id="btn-editar" class="btn-Original-azul" (click)="editProduct(product._id!)">Modificar</button>
+            <button id="btn-eliminar" class="btn-Original"  (click)="deleteProduct(product._id!)">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>

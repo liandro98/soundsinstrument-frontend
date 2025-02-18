@@ -1,0 +1,24 @@
+<div class="coments">
+    @for( coment of coments ; track $index ){
+      <div class="review-card">
+        <div class="review-header">
+          <!-- <img src="user-avatar.jpg" alt="User Avatar" class="user-avatar"> -->
+          <div class="user-info">
+            <h3 class="user-name">{{coment.usuario?.nombre}}</h3>
+            <div class="stars">
+              @for (star of [].constructor(coment.calificacion); track $index) {
+              <div class="review-rating">⭐</div>
+              }
+            </div>
+          </div>
+        </div>
+        <p class="review-text">
+          {{coment.comentario}}
+        </p>
+        <div class="review-footer">
+          <span class="review-date">{{coment.createdAt}}</span>
+        </div>
+      </div>
+    }
+</div>
+<button class="btn-Original" (click)="masComents()">Ver Más</button>

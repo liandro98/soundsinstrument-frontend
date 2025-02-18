@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error 404 - Página no encontrada</title>
+    <style>
+      body {
+        font-family: var(--fuente-principal), sans-serif;
+        background-color: var(--azul);
+        color: var(--blanco);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+      .error-container {
+        text-align: center;
+        background-color: var(--azul);
+        padding: 40px;
+        border-radius: 10px;
+        border: 2px solid var(--naranja);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+      }
+      h1 {
+        font-size: 100px;
+        margin: 0;
+        color: var(--naranja);
+      }
+      h2 {
+        font-size: 3.5rem;
+        margin: 20px 0;
+        color: var(--blanco);
+      }
+      p {
+        font-size: 2rem;
+        margin: 20px 0;
+        color: var(--blanco);
+      }
+      .error-image {
+        width: 300px;
+        margin: 20px 0;
+      }
+      a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 1rem 2rem;
+        background-color: var(--naranja);
+        color: var(--blanco);
+        text-decoration: none;
+        border-radius: 0.5rem;
+        border: 1px solid var(--blanco);
+        transition: background-color 0.3s, color 0.3s;
+        font-size: 1.6rem;
+      }
+      a:hover {
+        background-color: transparent;
+        border: 1px solid var(--naranja);
+        color: var(--naranja);
+      }
+      .stars {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/stardust.png");
+        animation: move-stars 50s linear infinite;
+        z-index: -1;
+      }
+      @keyframes move-stars {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 1000px 1000px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="error-container">
+      <h1>404</h1>
+      <!-- SVG personalizado -->
+      <svg
+        class="error-image"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 200 200"
+        fill="none"
+      >
+        <!-- Fondo del planeta -->
+        <circle cx="100" cy="100" r="80" fill="#5f5f5f" />
+        <!-- Anillos del planeta -->
+        <ellipse
+          cx="100"
+          cy="100"
+          rx="90"
+          ry="30"
+          fill="none"
+          stroke="#f76d11"
+          stroke-width="8"
+        />
+        <ellipse
+          cx="100"
+          cy="100"
+          rx="70"
+          ry="20"
+          fill="none"
+          stroke="#f76d11"
+          stroke-width="8"
+        />
+        <!-- Signo de prohibición -->
+        <circle cx="100" cy="100" r="50" fill="#f76d11" />
+        <line
+          x1="70"
+          y1="70"
+          x2="130"
+          y2="130"
+          stroke="#0d0f1d"
+          stroke-width="10"
+        />
+        <line
+          x1="130"
+          y1="70"
+          x2="70"
+          y2="130"
+          stroke="#0d0f1d"
+          stroke-width="10"
+        />
+      </svg>
+      <h2 class="title">¡Oops! Página no encontrada</h2>
+      <p>
+        Lo sentimos, la página que estás buscando no existe o ha sido movida.
+      </p>
+      <a href="/">Volver al Inicio</a>
+    </div>
+  </body>
+</html>

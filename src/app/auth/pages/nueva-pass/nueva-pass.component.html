@@ -1,0 +1,32 @@
+@if (!getValid() && id) {
+<ng-container>
+    @if (getValid() && id ) {
+    <app-alerta [title]="titulo" [msg]="msg" [enlace]="enlace" [routerLink]="url"></app-alerta>
+    }@else {
+    <div class="space">
+
+        <div class="login__contenedor">
+            <!-- Login contendor -->
+            <div class="centrar">
+                <div class="login-container">
+                    <h2>Recupera tu cuenta y no pierdas de vista tus <strong>productos favorivos</strong></h2>
+                    <form [formGroup]="nwPassForm" (ngSubmit)="onSubmit()">
+                        <label for="pass">Nueva Contraseña</label>
+                        <input type="password" id="pass" formControlName="pass" placeholder="Contraseña">
+
+                        <input class="btn-Original" type="submit" [disabled]="nwPassForm.invalid" value="Guardar">
+                    </form>
+                    <div class="btn__cont">
+                        <a class="btn-Original--ch" routerLink="/clientes/inicio">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+</ng-container>
+}@else {
+
+<app-alerta [title]="titulo" [msg]="msg" [enlace]="enlace" [routerLink]="url"></app-alerta>
+}

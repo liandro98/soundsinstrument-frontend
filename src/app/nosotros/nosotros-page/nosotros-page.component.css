@@ -1,0 +1,23 @@
+.centrarObjetos{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+/* Mapa */
+#map {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.mapa{
+    background-color: var(--blanco);
+    padding: 5rem;
+}
+
+.mapa__title {
+    color: var(--azul);
+    margin-bottom: 2rem;
+}

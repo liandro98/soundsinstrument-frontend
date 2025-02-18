@@ -1,0 +1,11 @@
+<div class="search-box">
+    <label class="search-box__icon" for="searchB">Buscar</label>
+    <input 
+        id="searchB"
+        class="search-box__input" 
+        type="text" 
+        placeholder="Buscar gifs..."
+        (keydown.enter)="searchTag()"
+        #iSearchTag
+    >
+</div>

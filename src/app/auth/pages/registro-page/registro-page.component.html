@@ -1,0 +1,78 @@
+<div class="space">
+
+<!-- Formulario de registro -->
+<div class="formulario-contenedor">
+  <mat-card class="formulario-card">
+    <div class="contenedor">
+      <h1 class="registro__title">Crear cuenta</h1>
+    </div>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="personalFormGroup" >
+        <form [formGroup]="personalFormGroup">
+          <ng-template matStepLabel>Información Personal</ng-template>
+          
+          <mat-form-field appearance="fill" class="formulario-campo">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" class="f-size" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="formulario-campo">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="formulario-campo">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required type="email">
+          </mat-form-field>
+
+          <div class="btns">
+            <a routerLink="/auth/login" class="btn-Original-azul">Volver</a>
+            <button class="btn-Original" matStepperNext
+              [disabled]="personalFormGroup.invalid">Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="securityFormGroup">
+        <form [formGroup]="securityFormGroup">
+          <ng-template matStepLabel>Seguridad</ng-template>
+
+          <mat-form-field appearance="fill" class="formulario-campo">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="pass" type="password" required>
+          </mat-form-field>
+
+          <div class="btns">
+            <button class="btn-Original" matStepperPrevious>Atrás</button>
+            <button class="btn-Original-azul" matStepperNext
+              [disabled]="securityFormGroup.invalid">Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="additionalFormGroup">
+        <form [formGroup]="additionalFormGroup">
+          <ng-template matStepLabel>Información Adicional</ng-template>
+
+          <mat-form-field appearance="fill" class="formulario-campo">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="phone">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="formulario-campo">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion">
+          </mat-form-field>
+
+          <div class="btns">
+            <button class="btn-Original" matStepperPrevious>Atrás</button>
+            <button class="btn-Original-azul" (click)="onSubmit()">Finalizar</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>
+
+</div>
