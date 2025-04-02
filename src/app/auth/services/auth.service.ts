@@ -23,6 +23,7 @@ export class AuthService {
 
   registroUs(usuario: Usuario): Observable<RespuestaProducto> {
     const url = `/auth/registro`; // api
+    console.log(usuario);
     return this.http.post<RespuestaProducto>(`${this.getBaseURL()}${url}`, usuario);
   }
 

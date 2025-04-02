@@ -3,8 +3,13 @@
 </div>
 
 <div class="contenido contenedor">
+  <!-- Botón para mostrar/ocultar filtros en móvil -->
+  <!-- <button class="mobile-filter-toggle" (click)="showFilters = !showFilters">
+    {{ showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+  </button> -->
+
   <!-- Contenedor izquierda: filtros -->
-  <div class="izquierda-column">
+  <div class="izquierda-column" [class.hidden]="!showFilters">
     <div class="opciones-filtros">
       <form [formGroup]="filtroForm" (ngSubmit)="aplicarFiltros()">
         <div class="opciones-filtros">
@@ -16,7 +21,6 @@
               @for (categoria of categorias; track $index) {
               <option [value]="categoria">{{categoria}}</option>
               }
-
             </select>
           </label>
 
@@ -40,12 +44,28 @@
       </form>
     </div>
   </div>
+
   <!-- Contenedor derecha: tarjetas -->
   <div class="derecha-column">
     <h2>Productos</h2>
+    
     <app-shared-listado-productos [productos]="products"></app-shared-listado-productos>
-    <button class="btn-Original" (click)="masComents()">Ver Más</button>
-
+    
+    <!-- Botón "Ver más" con condicional -->
+    <button class="btn-Original" 
+            (click)="masComents()" 
+            *ngIf="hayMasProductos()">
+      Ver Más
+    </button>
+    
+    <!-- Mensajes de estado -->
+    <p *ngIf="!hayMasProductos() && products.length > 0" class="no-more-products">
+      Has visto todos los productos disponibles
+    </p>
+    
+    <p *ngIf="products.length === 0" class="no-products">
+      No se encontraron productos con los filtros aplicados
+    </p>
   </div>
 </div>
 

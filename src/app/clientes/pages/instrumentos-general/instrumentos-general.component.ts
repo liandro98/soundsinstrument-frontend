@@ -10,15 +10,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './instrumentos-general.component.css'
 })
 export class InstrumentosGeneralComponent implements OnInit {
-
-  public productos: Producto[] = [];
+  public productos: Producto[] = []; // Todos los productos filtrados
   public categorias = ['Percusión', 'Teclas', 'Viento', 'Membranófonos', 'Electrófonos'];
   public filtroForm!: FormGroup;
 
-  public products: Producto[] = [];
-  public iniciales: number = 3;
-  public siguientes: number = 3;
-  public actuales: number = 0;
+  public products: Producto[] = []; // Productos mostrados actualmente
+  public iniciales: number = 3; // Productos a mostrar inicialmente
+  public siguientes: number = 3; // Productos a cargar al hacer clic en "Ver más"
+  public actuales: number = 0; // Contador de productos mostrados
 
   constructor(
     private productoService: ProductoService,
@@ -27,39 +26,48 @@ export class InstrumentosGeneralComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // Inicializa el formulario reactivo
+    this.inicializarFormulario();
+    this.aplicarFiltros();
+  }
+
+  inicializarFormulario(): void {
     this.filtroForm = this.fb.group({
       categoria: [''],
       precioMin: [''],
       precioMax: [''],
       nombre: ['']
     });
-
-    this.aplicarFiltros();
-
   }
 
-  aplicarFiltros() {
+  aplicarFiltros(): void {
     const filtros = this.filtroForm.value;
     this.productoService.getProductosFiltrados(filtros)
       .subscribe(resp => {
         this.productos = resp.data;
-        console.log(resp);
-        console.log(this.productos);
         this.productsIniciales();
       });
   }
 
-  productsIniciales() {
-    this.products = this.productos.slice(0, this.iniciales); // Muestra los primeros 3 productos
+  productsIniciales(): void {
+    this.products = this.productos.slice(0, this.iniciales);
     this.actuales = this.iniciales;
   }
 
-  masComents() {
+  masComents(): void {
     const nuevosProductos = this.productos.slice(this.actuales, this.actuales + this.siguientes);
-
-    this.products = [...this.products, ...nuevosProductos]; // Añade los siguientes productos al array actual
-    this.actuales += this.siguientes; // Actualiza el índice de productos mostrados
+    this.products = [...this.products, ...nuevosProductos];
+    this.actuales += this.siguientes;
+  }
+  showFilters = false;
+  // Método para determinar si hay más productos por cargar
+  hayMasProductos(): boolean {
+    
+    return this.actuales < this.productos.length;
   }
 
+  // Método para reiniciar la paginación cuando se aplican filtros
+  reiniciarPaginacion(): void {
+    this.actuales = 0;
+    this.productsIniciales();
+  }
 }

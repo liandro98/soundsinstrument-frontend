@@ -1,19 +1,53 @@
+/* Estilos base */
+.contenedor {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 .contenido {
   display: grid;
-  grid-template-columns: .7fr 1fr 1fr;
-  column-gap: .5rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
 }
 
-/* Left column (filters) */
+/* Columna izquierda (filtros) */
 .izquierda-column {
-  grid-column: 1/2;
-  padding: 1.5rem;
   background-color: var(--blanco);
   border-radius: .5rem;
-  width: 100%;
+  padding: 1.5rem;
 }
 
+/* Columna derecha (productos) */
+.derecha-column {
+  background-color: var(--blanco);
+  border-radius: .5rem;
+  padding: 2rem;
+}
 
+/* Estilos para tablet (768px+) */
+@media (min-width: 768px) {
+  .contenido {
+    grid-template-columns: .7fr 1.3fr;
+  }
+  
+  .izquierda-column {
+    position: sticky;
+    top: 1rem;
+    height: fit-content;
+  }
+}
+
+/* Estilos para escritorio (1024px+) */
+@media (min-width: 1024px) {
+  .contenido {
+    grid-template-columns: .5fr 1.5fr;
+  }
+}
+
+/* Estilos de filtros (manteniendo tus colores) */
 .opciones-filtros h4 {
   font-size: 1.2em;
   color: var(--azul);
@@ -21,7 +55,6 @@
   margin-bottom: 10px;
 }
 
-/* Estilos para cada filtro */
 .opciones-filtros label {
   display: block;
   font-size: 1em;
@@ -39,40 +72,49 @@
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1em;
-  transition: border 0.3s;
 }
 
-.opciones-filtros select:focus,
-.opciones-filtros input[type="number"]:focus,
-.opciones-filtros input[type="text"]:focus {
-  border-color: #007bff;
-  outline: none;
+/* Botones (manteniendo tu estilo original) */
+.btn-Original {
+  background-color: var(--azul);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+  margin-top: 2rem;
 }
 
-
-
-
-/* Right column (products) */
-.derecha-column {
-  grid-column: 2/4;
-  background-color: var(--blanco);
-  border-radius: .5rem;
-  padding: 2rem;
+.btn-Original:hover {
+  background-color: darken(var(--azul), 10%);
 }
 
-.derecha-column h2 {
-  font-size: 1.5em;
-  color: var(--azul);
-  margin-top: 0;
-  margin-bottom: 1em;
-}
-
+/* Grid de productos responsivo */
 .productos-modulo {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1em;
 }
 
-.derecha-column button{
+/* Ajustes responsivos para el grid */
+@media (max-width: 600px) {
+  .productos-modulo {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+/* Ocultar botón "Ver más" cuando no hay suficientes productos */
+.derecha-column button[hidden] {
+  display: none;
+}
+
+/* Estilos para los mensajes */
+.no-more-products,
+.no-products {
+  text-align: center;
+  color: var(--azul);
   margin-top: 2rem;
+  font-style: italic;
 }
