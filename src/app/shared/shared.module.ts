@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SharedListadoProductosComponent } from './components/shared-listado-productos/shared-listado-productos.component';
 import { MessagesModule } from 'primeng/messages';
 import { ComentarioComponent } from './components/comentario/comentario.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ComentarioComponent } from './components/comentario/comentario.componen
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    MessagesModule
+    MessagesModule,
+    FormsModule
   ],
   exports: [
     NavBarComponent,

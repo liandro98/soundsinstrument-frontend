@@ -3,11 +3,12 @@ import { Producto } from '../../../shared/interfaces/producto';
 import { ProductoService } from '../../../shared/services/producto.service';
 import { Filtro } from '../../../shared/interfaces/filtro';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-instrumentos-general',
   templateUrl: './instrumentos-general.component.html',
-  styleUrl: './instrumentos-general.component.css'
+  styleUrls: ['./instrumentos-general.component.css']
 })
 export class InstrumentosGeneralComponent implements OnInit {
   public productos: Producto[] = []; // Todos los productos filtrados
@@ -18,16 +19,29 @@ export class InstrumentosGeneralComponent implements OnInit {
   public iniciales: number = 3; // Productos a mostrar inicialmente
   public siguientes: number = 3; // Productos a cargar al hacer clic en "Ver más"
   public actuales: number = 0; // Contador de productos mostrados
+  showFilters = false;
 
   constructor(
     private productoService: ProductoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.inicializarFormulario();
-    this.aplicarFiltros();
+    
+    // Escuchar cambios en los parámetros de la URL (para la búsqueda desde el navbar)
+    this.route.queryParams.subscribe(params => {
+      if (params['search']) {
+        // Si hay un parámetro de búsqueda, actualizar el formulario
+        this.filtroForm.patchValue({
+          nombre: params['search']
+        });
+      }
+      // Aplicar los filtros con el valor del formulario (que podría haberse actualizado)
+      this.aplicarFiltros();
+    });
   }
 
   inicializarFormulario(): void {
@@ -44,7 +58,7 @@ export class InstrumentosGeneralComponent implements OnInit {
     this.productoService.getProductosFiltrados(filtros)
       .subscribe(resp => {
         this.productos = resp.data;
-        this.productsIniciales();
+        this.reiniciarPaginacion();
       });
   }
 
@@ -58,10 +72,9 @@ export class InstrumentosGeneralComponent implements OnInit {
     this.products = [...this.products, ...nuevosProductos];
     this.actuales += this.siguientes;
   }
-  showFilters = false;
+  
   // Método para determinar si hay más productos por cargar
   hayMasProductos(): boolean {
-    
     return this.actuales < this.productos.length;
   }
 

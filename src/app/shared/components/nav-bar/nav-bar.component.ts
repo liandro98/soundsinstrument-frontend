@@ -6,7 +6,7 @@ import { Usuario } from '../../interfaces/usuario';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css'
+  styleUrls: ['./nav-bar.component.css']
 })
 
 export class NavBarComponent implements OnInit {
@@ -15,6 +15,7 @@ export class NavBarComponent implements OnInit {
   public log: boolean = false;
   private rol:string = '';
   public usr!:Usuario;
+  public searchTerm: string = '';
 
   getRol(){
     return this.rol;
@@ -38,6 +39,15 @@ export class NavBarComponent implements OnInit {
     this.showMenu = !this.showMenu;
   }
 
+  onSearch(event: Event): void {
+    event.preventDefault();
+    if (this.searchTerm.trim()) {
+      this.route.navigate(['/clientes/instrumentos'], {
+        queryParams: { search: this.searchTerm }
+      });
+      this.searchTerm = '';
+    }
+  }
 
   // Método que se ejecuta al hacer clic fuera del menú
   @HostListener('document:click', ['$event'])
@@ -53,9 +63,10 @@ export class NavBarComponent implements OnInit {
 
   logOut():void {
     this.authServ.logOut();
+    window.sessionStorage.removeItem('tkn');
+    window.sessionStorage.removeItem('rol');
     this.log = false;
     this.route.navigate(['/clientes']);
   }
 
 }
-

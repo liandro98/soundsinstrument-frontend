@@ -18,6 +18,18 @@
         <a class="nav__enlace" routerLink="/clientes/inicio" routerLinkActive="active-link" >Inicio</a>
         <a class="nav__enlace" routerLink="/clientes/instrumentos" routerLinkActive="active-link" >Catálogo</a>
         <a class="nav__enlace" routerLink="/nosotros" routerLinkActive="active-link" >Nosotros</a>
+        <form class="nav__search-form" (submit)="onSearch($event)">
+            <input 
+                type="text" 
+                [(ngModel)]="searchTerm"
+                name="searchTerm"
+                placeholder="Buscar instrumentos..." 
+                class="nav__search-input"
+            >
+            <button type="submit" class="nav__search-button">
+                <span>Buscar</span>
+            </button>
+        </form>
         @if (getRol()==='ADMTlN') {
             <a class="nav__enlace" routerLink="/administracion/" routerLinkActive="active-link" >Gestionar productos</a>
         }
