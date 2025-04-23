@@ -22,7 +22,11 @@
           id="email"
           formControlName="email"
           placeholder="Introduce tu correo"
+          [ngClass]="{'input-error': showInputErrors && loginForm.get('email')?.invalid}"
         />
+        <small *ngIf="showInputErrors && loginForm.get('email')?.invalid" class="error-message">
+          Por favor, introduce un correo electrónico válido
+        </small>
 
         <label for="pass">Contraseña</label>
         <input
@@ -30,13 +34,30 @@
           id="pass"
           formControlName="pass"
           placeholder="Introduce tu contraseña"
+          [ngClass]="{'input-error': showInputErrors && loginForm.get('pass')?.invalid}"
         />
+        <small *ngIf="showInputErrors && loginForm.get('pass')?.invalid" class="error-message">
+          Por favor, introduce tu contraseña
+        </small>
 
-        <div class="">
+        <!-- reCAPTCHA -->
+        <div class="recaptcha-container" [ngClass]="{'recaptcha-invalid': showRecaptchaError}">
+          <re-captcha
+            formControlName="recaptcha"
+            (resolved)="resolved($event || '')"
+            (expired)="onCaptchaExpired()"
+            siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          ></re-captcha>
+          <small *ngIf="showRecaptchaError || (!captchaResolved && loginForm.get('recaptcha')?.touched)" class="error-message">
+            Por favor, verifica que no eres un robot
+          </small>
+        </div>
+
+        <div class="login-button">
           <input
             class="btn-Original"
             type="submit"
-            [disabled]="loginForm.invalid"
+            [disabled]="loginForm.invalid || !captchaResolved"
             value="Login"
           />
         </div>

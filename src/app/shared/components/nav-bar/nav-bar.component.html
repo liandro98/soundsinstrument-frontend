@@ -38,27 +38,20 @@
                 <span class="profile-name">{{ usr.nombre }}</span> <!-- Muestra el nombre del usuario -->
                 <div class="dropdown-menu">
                     <a routerLink="/auth/perfil" class="dropdown-item">Ver Perfil</a>
-                    <a (click)="logOut()" class="dropdown-item">Cerrar Sesión</a>
+                    <a routerLink="/clientes" (click)="logOut()" class="dropdown-item">Cerrar Sesión</a>
                 </div>
             </div>
         }@else {
             <a class="nav__enlace" routerLink="/auth" >Iniciar Sesión</a>
         }
-        <!-- <div class="hamburger--close">
-            <button 
-                class="hamburger__btn"
-                (click)="onShowMenu()"
-            >
-                <img src="assets/close.svg" alt="menu icon">
-            </button>
-        </div> -->
+        <div class="nav__cart">
+            <a routerLink="/ventas/cart">
+                <img src="assets/iconCarrito.svg" alt="icono carrito">
+            </a>
+        </div>
     </div>
 
-    <div class="nav__cart">
-        <a routerLink="/ventas/cart">
-            <img src="assets/iconCarrito.svg" alt="icono carrito">
-        </a>
-    </div>
+    
 
 
 </nav>

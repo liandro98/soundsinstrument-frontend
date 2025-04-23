@@ -66,7 +66,8 @@ export class NavBarComponent implements OnInit {
     window.sessionStorage.removeItem('tkn');
     window.sessionStorage.removeItem('rol');
     this.log = false;
-    this.route.navigate(['/clientes']);
+    // this.route.navigate(['/clientes']);
+    window.location.href = '/'; // Recarga completa al navegar
   }
 
 }

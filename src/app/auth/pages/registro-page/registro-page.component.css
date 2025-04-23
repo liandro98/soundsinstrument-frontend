@@ -1,38 +1,68 @@
-
-
 .formulario-contenedor {
-  height: 100dvh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
-
-.formulario card {
+.formulario-card {
   border-radius: 1rem;
   overflow: hidden;
+  width: 100%;
+  max-width: 95%;
 }
 
+@media (min-width: 768px) {
+  .formulario-card {
+    max-width: 80%;
+  }
+}
 
+@media (min-width: 992px) {
+  .formulario-card {
+    max-width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .formulario-card {
+    max-width: 50%;
+  }
+}
 
 .mat-mdc-card {
   background-color: var(--blanco);
   padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+@media (min-width: 768px) {
+  .mat-mdc-card {
+    padding: 2rem;
+  }
+}
 
 .mat-stepper-vertical,
 .mat-stepper-horizontal {
   background-color: var(--blanco);
   border-radius: .5rem;
-
-
+  width: 100%;
+  overflow-x: hidden;
 }
 
 mat-form-field {
   width: 100%;
   margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
+@media (min-width: 768px) {
+  mat-form-field {
+    font-size: 1.6rem;
+  }
 }
 
 .f-size {
@@ -50,11 +80,61 @@ mat-form-field {
   background-color: var(--naranja);
 }
 
-
 input  {
   font-size: 1.8rem !important;
 }
 
 .btns {
-  gap: 3rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .btns {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .btns button, .btns a {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .btns {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .btns {
+    gap: 3rem;
+  }
+}
+
+mat-error {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #f44336;
+}
+
+mat-hint {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 360px) {
+  .formulario-card {
+    padding: 0.5rem;
+  }
+  
+  .mat-mdc-card {
+    padding: 0.5rem;
+  }
+  
+  input {
+    font-size: 1.6rem !important;
+  }
 }

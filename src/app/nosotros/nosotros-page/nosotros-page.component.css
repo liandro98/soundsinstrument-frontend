@@ -21,3 +21,65 @@
     color: var(--azul);
     margin-bottom: 2rem;
 }
+
+/* Sección de redes sociales */
+.social-section {
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.social-title {
+    color: var(--blanco);
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+@media (min-width: 768px) {
+    .social-icons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 5rem;
+    }
+}
+
+.social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    transform: scale(1.05);
+}
+
+.social-icon {
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 1rem;
+}
+
+.social-link span {
+    color: var(--blanco);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .social-icon {
+        width: 7rem;
+        height: 7rem;
+    }
+    
+    .social-link span {
+        font-size: 2rem;
+    }
+}

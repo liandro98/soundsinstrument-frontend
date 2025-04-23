@@ -1,12 +1,22 @@
 <footer class="footer">
     <div class="footer__contenedor footer__contenido">
         <nav class="footer__nav">
-            <a class="footer__enlace" href="#">Inicio</a>
-            <a class="footer__enlace" href="#">Instrumentos</a>
-            <a class="footer__enlace" href="/nosotros">Nosotros</a>
+            <a class="footer__enlace" routerLink="/clientes/inicio">Inicio</a>
+            <a class="footer__enlace" routerLink="/clientes/instrumentos">Instrumentos</a>
+            <a class="footer__enlace" routerLink="/nosotros">Nosotros</a>
         </nav>
+        
+        <div class="footer__social">
+            <a href="https://instagram.com" target="_blank" class="footer__social-link">
+                <img src="assets/instagram.svg" alt="Instagram" class="footer__social-icon">
+            </a>
+            <a href="https://wa.me/1234567890" target="_blank" class="footer__social-link">
+                <img src="assets/whatsapp.svg" alt="WhatsApp" class="footer__social-icon">
+            </a>
+        </div>
+        
         <p class="footer__copyright">
-            Todos los derechos reservados
+            Todos los derechos reservados &copy; 2025
         </p>
     </div>
 </footer>

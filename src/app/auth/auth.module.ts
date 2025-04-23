@@ -19,6 +19,8 @@ import { MsgPageComponent } from './pages/msg-page/msg-page.component';
 import { ConfirmarPageComponent } from './pages/confirmar-page/confirmar-page.component';
 import { OlvidePassComponent } from './pages/olvide-pass/olvide-pass.component';
 import { AlertaComponent } from './components/alerta/alerta.component';
+// Importar reCAPTCHA
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { NuevaPassComponent } from './pages/nueva-pass/nueva-pass.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
@@ -50,7 +52,9 @@ import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.compo
     MatStepperModule,
     MatCheckboxModule,
     MatSelectModule,
-
+    // Módulos de reCAPTCHA
+    RecaptchaModule,
+    RecaptchaFormsModule
   ]
 })
 export class AuthModule { }

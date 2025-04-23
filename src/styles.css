@@ -42,6 +42,8 @@ img {
     width: 95%;
 }
 
+
+
 [class*="heading"] {
     font-size: 4rem;
     text-align: left;
@@ -76,6 +78,7 @@ img {
     align-items: center;
     text-align: center;
     justify-content: center;
+    cursor: pointer; /* Añadir cursor pointer para indicar que es clickeable */
 }
 
 /* Efecto hover */

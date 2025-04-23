@@ -41,6 +41,9 @@
           <mat-form-field appearance="fill" class="formulario-campo">
             <mat-label>Contraseña</mat-label>
             <input matInput formControlName="pass" type="password" required>
+            <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['required']">La contraseña es obligatoria</mat-error>
+            <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['minlength']">La contraseña debe tener al menos {{minPasswordLength}} caracteres</mat-error>
+            <mat-hint>Mínimo {{minPasswordLength}} caracteres</mat-hint>
           </mat-form-field>
 
           <div class="btns">

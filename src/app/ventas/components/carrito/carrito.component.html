@@ -3,12 +3,12 @@
     <div id="carrito" class="bg-white p-3">
         @if(showNotify){
 
-            <div class="notify" [class]="{'hiden':closed} "  >
+            <!-- <div class="notify" [class]="{'hiden':closed} "  >
                 <button (click)="closeNotify()" class="btn-close" >X</button>
                 <p class="notify__text">
                     Has sido el afortunado de obtener un descuento del {{ (usr.descuento!.descuento)*100 }}% en nuestra tienda.
                 </p>
-            </div>
+            </div> -->
         }         
         @if(cart.length === 0){
             <p class="text-center">El carrito esta vacio</p>
