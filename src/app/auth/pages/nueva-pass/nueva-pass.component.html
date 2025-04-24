@@ -14,6 +14,16 @@
                         <label for="pass">Nueva Contraseña</label>
                         <input type="password" id="pass" formControlName="pass" placeholder="Contraseña">
 
+                        <!-- Aquí va la validación visual -->
+                        <div *ngIf="nwPassForm.get('pass')?.touched && nwPassForm.get('pass')?.invalid" class="error-text">
+                            <small *ngIf="nwPassForm.get('pass')?.errors?.['required']">
+                            La contraseña es obligatoria.
+                            </small>
+                            <small *ngIf="nwPassForm.get('pass')?.errors?.['pattern']">
+                            La contraseña debe tener al menos una mayúscula, un carácter especial y mínimo 8 caracteres.
+                            </small>
+                        </div>
+
                         <input class="btn-Original" type="submit" [disabled]="nwPassForm.invalid" value="Guardar">
                     </form>
                     <div class="btn__cont">

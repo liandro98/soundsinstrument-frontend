@@ -20,7 +20,7 @@ export class NuevaPassComponent {
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private activatedRoute: ActivatedRoute) {
     this.nwPassForm = this.fb.group({
-      pass: ['', Validators.required]
+      pass: ['', Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/)]
     });
   }
 
