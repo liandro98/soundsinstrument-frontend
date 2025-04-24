@@ -1,81 +1,132 @@
 <div class="space">
+  <div class="formulario-contenedor">
+    <mat-card class="formulario-card">
+      <div class="contenedor">
+        <h1 class="registro__title">Crear cuenta</h1>
+        <mat-error *ngIf="msg.title" class="error-message">
+          <strong>{{msg.title}}</strong>: {{msg.msg}}
+        </mat-error>
+      </div>
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <!-- Paso 1: Información Personal -->
+        <mat-step [stepControl]="personalFormGroup">
+          <form [formGroup]="personalFormGroup">
+            <ng-template matStepLabel>Información Personal</ng-template>
+            
+            <mat-form-field appearance="fill" class="formulario-campo">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre" required>
+              <mat-error *ngIf="personalFormGroup.get('nombre')?.errors?.['required']">
+                El nombre es obligatorio
+              </mat-error>
+              <mat-error *ngIf="personalFormGroup.get('nombre')?.errors?.['minlength']">
+                El nombre debe tener al menos 2 caracteres
+              </mat-error>
+            </mat-form-field>
 
-<!-- Formulario de registro -->
-<div class="formulario-contenedor">
-  <mat-card class="formulario-card">
-    <div class="contenedor">
-      <h1 class="registro__title">Crear cuenta</h1>
-    </div>
-    <mat-horizontal-stepper [linear]="true" #stepper>
-      <mat-step [stepControl]="personalFormGroup" >
-        <form [formGroup]="personalFormGroup">
-          <ng-template matStepLabel>Información Personal</ng-template>
-          
-          <mat-form-field appearance="fill" class="formulario-campo">
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="nombre" class="f-size" required>
-          </mat-form-field>
+            <mat-form-field appearance="fill" class="formulario-campo">
+              <mat-label>Apellido</mat-label>
+              <input matInput formControlName="apellido" required>
+              <mat-error *ngIf="personalFormGroup.get('apellido')?.errors?.['required']">
+                El apellido es obligatorio
+              </mat-error>
+              <mat-error *ngIf="personalFormGroup.get('apellido')?.errors?.['minlength']">
+                El apellido debe tener al menos 2 caracteres
+              </mat-error>
+            </mat-form-field>
 
-          <mat-form-field appearance="fill" class="formulario-campo">
-            <mat-label>Apellido</mat-label>
-            <input matInput formControlName="apellido" required>
-          </mat-form-field>
+            <mat-form-field appearance="fill" class="formulario-campo">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" required type="email">
+              <mat-error *ngIf="personalFormGroup.get('email')?.errors?.['required']">
+                El email es obligatorio
+              </mat-error>
+              <mat-error *ngIf="personalFormGroup.get('email')?.errors?.['email']">
+                Por favor ingresa un email válido
+              </mat-error>
+            </mat-form-field>
 
-          <mat-form-field appearance="fill" class="formulario-campo">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" required type="email">
-          </mat-form-field>
+            <div class="btns">
+              <a routerLink="/auth/login" class="btn-Original-azul">Volver</a>
+              <button class="btn-Original" matStepperNext
+                [disabled]="personalFormGroup.invalid">Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
 
-          <div class="btns">
-            <a routerLink="/auth/login" class="btn-Original-azul">Volver</a>
-            <button class="btn-Original" matStepperNext
-              [disabled]="personalFormGroup.invalid">Siguiente</button>
-          </div>
-        </form>
-      </mat-step>
+        <!-- Paso 2: Seguridad -->
+        <mat-step [stepControl]="securityFormGroup">
+          <form [formGroup]="securityFormGroup">
+            <ng-template matStepLabel>Seguridad</ng-template>
 
-      <mat-step [stepControl]="securityFormGroup">
-        <form [formGroup]="securityFormGroup">
-          <ng-template matStepLabel>Seguridad</ng-template>
+            <mat-form-field appearance="fill" class="formulario-campo">
+              <mat-label>Contraseña</mat-label>
+              <input matInput formControlName="pass" type="password" required>
+              <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['required']">
+                La contraseña es obligatoria
+              </mat-error>
+              <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['minlength']">
+                La contraseña debe tener al menos 8 caracteres
+              </mat-error>
+              <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['missingUpperCase']">
+                Debe contener al menos una mayúscula
+              </mat-error>
+              <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['missingLowerCase']">
+                Debe contener al menos una minúscula
+              </mat-error>
+              <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['missingNumber']">
+                Debe contener al menos un número
+              </mat-error>
+              <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['missingSpecialChar']">
+                Debe contener al menos un carácter especial
+              </mat-error>
+              <mat-hint>Requisitos: 8+ caracteres, mayúscula, minúscula, número y carácter especial</mat-hint>
+            </mat-form-field>
 
-          <mat-form-field appearance="fill" class="formulario-campo">
-            <mat-label>Contraseña</mat-label>
-            <input matInput formControlName="pass" type="password" required>
-            <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['required']">La contraseña es obligatoria</mat-error>
-            <mat-error *ngIf="securityFormGroup.get('pass')?.errors?.['minlength']">La contraseña debe tener al menos {{minPasswordLength}} caracteres</mat-error>
-            <mat-hint>Mínimo {{minPasswordLength}} caracteres</mat-hint>
-          </mat-form-field>
+            <div class="btns">
+              <button class="btn-Original" matStepperPrevious>Atrás</button>
+              <button class="btn-Original-azul" matStepperNext
+                [disabled]="securityFormGroup.invalid">Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
 
-          <div class="btns">
-            <button class="btn-Original" matStepperPrevious>Atrás</button>
-            <button class="btn-Original-azul" matStepperNext
-              [disabled]="securityFormGroup.invalid">Siguiente</button>
-          </div>
-        </form>
-      </mat-step>
+        <!-- Paso 3: Información Adicional -->
+        <mat-step [stepControl]="additionalFormGroup">
+          <form [formGroup]="additionalFormGroup">
+            <ng-template matStepLabel>Información Adicional</ng-template>
 
-      <mat-step [stepControl]="additionalFormGroup">
-        <form [formGroup]="additionalFormGroup">
-          <ng-template matStepLabel>Información Adicional</ng-template>
+            <mat-form-field appearance="fill" class="formulario-campo">
+              <mat-label>Teléfono</mat-label>
+              <input matInput formControlName="phone" type="tel">
+              <mat-error *ngIf="additionalFormGroup.get('phone')?.errors?.['required']">
+                El teléfono es obligatorio
+              </mat-error>
+              <mat-error *ngIf="additionalFormGroup.get('phone')?.errors?.['invalidPhone']">
+                Ingresa un número de teléfono válido (10-11 dígitos)
+              </mat-error>
+            </mat-form-field>
 
-          <mat-form-field appearance="fill" class="formulario-campo">
-            <mat-label>Teléfono</mat-label>
-            <input matInput formControlName="phone">
-          </mat-form-field>
+            <mat-form-field appearance="fill" class="formulario-campo">
+              <mat-label>Dirección</mat-label>
+              <input matInput formControlName="direccion">
+              <mat-error *ngIf="additionalFormGroup.get('direccion')?.errors?.['required']">
+                La dirección es obligatoria
+              </mat-error>
+              <mat-error *ngIf="additionalFormGroup.get('direccion')?.errors?.['minlength']">
+                La dirección debe tener al menos 5 caracteres
+              </mat-error>
+            </mat-form-field>
 
-          <mat-form-field appearance="fill" class="formulario-campo">
-            <mat-label>Dirección</mat-label>
-            <input matInput formControlName="direccion">
-          </mat-form-field>
-
-          <div class="btns">
-            <button class="btn-Original" matStepperPrevious>Atrás</button>
-            <button class="btn-Original-azul" (click)="onSubmit()">Finalizar</button>
-          </div>
-        </form>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </mat-card>
-</div>
-
+            <div class="btns">
+              <button class="btn-Original" matStepperPrevious>Atrás</button>
+              <button class="btn-Original-azul" (click)="onSubmit()" [disabled]="isSubmitting">
+                {{isSubmitting ? 'Registrando...' : 'Finalizar'}}
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card>
+  </div>
 </div>
