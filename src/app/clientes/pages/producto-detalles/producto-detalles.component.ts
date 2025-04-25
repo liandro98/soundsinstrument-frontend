@@ -72,6 +72,8 @@ export class ProductoDetallesComponent implements OnInit {
       this.comentarioService.aggComentario(comentario)
         .subscribe(resp => {
           console.log(resp);
+          // Para que se actualice la vista recargando la pagina
+          location.reload(); 
         });
     } else {
       let url: string = `/clientes/instrumento/${this.id}`;

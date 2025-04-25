@@ -115,6 +115,10 @@ export class CarritoComponent implements OnInit {
           // Aquí puedes manejar el pedido en tu backend si es necesario
           this.detalleVenta();
 
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+
         });
       },
       onError: (err: any) => {

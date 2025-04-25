@@ -10,7 +10,8 @@ import { VentasModule } from './ventas/ventas.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenExpiradoInterceptor } from './auth/token-expirado.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,12 @@ import { provideHttpClient } from '@angular/common/http';
   ],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenExpiradoInterceptor,
+      multi: true
+    }
 
   ],
   bootstrap: [AppComponent]
