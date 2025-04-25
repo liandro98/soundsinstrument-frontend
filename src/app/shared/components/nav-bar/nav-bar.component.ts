@@ -1,7 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
-import { Route, Router, RouteReuseStrategy } from '@angular/router';
+import { NavigationEnd, Route, Router, RouteReuseStrategy } from '@angular/router';
 import { Usuario } from '../../interfaces/usuario';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,6 +17,7 @@ export class NavBarComponent implements OnInit {
   private rol:string = '';
   public usr!:Usuario;
   public searchTerm: string = '';
+  breadcrumbsVisible = true;
 
   getRol(){
     return this.rol;
@@ -33,6 +35,13 @@ export class NavBarComponent implements OnInit {
           this.usr = resp.data;
         })
     }
+
+    this.route.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      console.log('Ruta actual:', this.route.url);
+      // this.breadcrumbsVisible = this.router.url !== '/clientes/inicio';
+    });
   }
   
   onShowMenu(): void {

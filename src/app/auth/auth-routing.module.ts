@@ -16,15 +16,15 @@ const routes: Routes = [
     path: '',
     component: LayoutAuthComponent,
     children: [
-      { path: 'login', component: LoginPagesComponent, canActivate:[publicGuard] },
-      { path: 'registro', component: RegistroPageComponent },
-      { path: 'confirmar', component: ConfirmarPageComponent },
-      { path: 'confirmar/:tkn', component: ConfirmarPageComponent },
-      { path: 'recuperar-cuenta', component: OlvidePassComponent },
-      { path: 'nueva-pass', component: NuevaPassComponent },
+      { path: 'login', component: LoginPagesComponent, canActivate:[publicGuard],  data: { breadcrumb: 'Login' }},
+      { path: 'registro', component: RegistroPageComponent, data: { breadcrumb: 'Registro' } },
+      { path: 'confirmar', component: ConfirmarPageComponent, data: { breadcrumb: 'Confirmar' } },
+      { path: 'confirmar/:tkn', component: ConfirmarPageComponent},
+      { path: 'recuperar-cuenta', component: OlvidePassComponent, data: { breadcrumb: 'Confirmar' } },
+      { path: 'nueva-pass', component: NuevaPassComponent, data: { breadcrumb: 'Restlabecer password' } },
       { path: 'nueva-pass/:tkn', component: NuevaPassComponent },
-      { path: 'perfil', component:PerfilComponent},
-      { path: 'edit-perfil', component:EditarPerfilComponent },
+      { path: 'perfil', component:PerfilComponent, data: { breadcrumb: 'Perfil' }},
+      { path: 'edit-perfil', component:EditarPerfilComponent, data: { breadcrumb: 'Editar perfil' } },
       { path: '**', redirectTo: 'login' }
     ]
   },

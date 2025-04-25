@@ -1,0 +1,52 @@
+.breadcrumb-container {
+  display: flex;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.breadcrumb-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  white-space: nowrap;
+  margin-right: 0.5rem;
+}
+
+.breadcrumb-link {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.breadcrumb-link:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.breadcrumb-current {
+  color: #666;
+  font-weight: bold;
+}
+
+.breadcrumb-separator {
+  margin: 0 0.5rem;
+  color: #999;
+}
+
+/* Para móviles */
+@media (max-width: 768px) {
+  .breadcrumb-container {
+    display: none;
+  }
+}

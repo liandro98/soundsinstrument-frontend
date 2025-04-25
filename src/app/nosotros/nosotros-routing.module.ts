@@ -5,7 +5,8 @@ import { NosotrosPageComponent } from './nosotros-page/nosotros-page.component';
 const routes: Routes = [
   {
       path: 'nosotros',
-      component: NosotrosPageComponent
+      component: NosotrosPageComponent,
+      data: { breadcrumb: 'Sobre' }
   },
   {
     path: '**',

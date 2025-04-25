@@ -6,27 +6,30 @@ import { authGuard } from './auth/guards/auth.guard';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule),
+    data: { breadcrumb: 'Autenticación' }
   },
   {
     path: 'clientes',
-    loadChildren: () => import('./clientes/clientes.module').then( m => m.ClientesModule )
+    loadChildren: () => import('./clientes/clientes.module').then( m => m.ClientesModule ),
+    data: { breadcrumb: 'Clientes' }
   },
   {
     path: 'ventas',
     loadChildren: () => import('./ventas/ventas.module').then( m => m.VentasModule ),
     canActivate:[authGuard],
-    data: {expectedRole:['Cliente','ADMTlN']}
+    data: {expectedRole:['Cliente','ADMTlN'], breadcrumb: 'Ventas'}
   },
   {
     path: 'administracion',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate:[authGuard],
-    data: {expectedRole:'ADMTlN'}
+    data: {expectedRole:'ADMTlN', breadcrumb: 'Administracion'},
   },
   {
     path: 'nosotros',
-    loadChildren: () => import('./nosotros/nosotros.module').then( m => m.NosotrosModule )
+    loadChildren: () => import('./nosotros/nosotros.module').then( m => m.NosotrosModule ),
+    data: { breadcrumb: 'Nosotros' }
   },
   {
     path: '404',

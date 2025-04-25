@@ -4,13 +4,14 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { Error404PageComponent } from './pages/error404-page/error404-page.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { ProductoComponent } from './components/producto/producto.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SharedListadoProductosComponent } from './components/shared-listado-productos/shared-listado-productos.component';
 import { MessagesModule } from 'primeng/messages';
 import { ComentarioComponent } from './components/comentario/comentario.component';
 import { FormsModule } from '@angular/forms';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 
 @NgModule({
@@ -23,13 +24,15 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     SharedListadoProductosComponent,
     ComentarioComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     CommonModule,
     RouterLink,
     RouterLinkActive,
     MessagesModule,
-    FormsModule
+    FormsModule, 
+    RouterModule
   ],
   exports: [
     NavBarComponent,
@@ -39,7 +42,8 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     SharedListadoProductosComponent,
     MessagesModule,
-    ComentarioComponent
+    ComentarioComponent,
+    BreadcrumbsComponent
   ]
 })
 export class SharedModule { }

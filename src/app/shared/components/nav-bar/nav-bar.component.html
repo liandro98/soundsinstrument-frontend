@@ -1,57 +1,59 @@
-<nav class="nav">
+    <nav class="nav">
 
-    <div class="hamburger">
-        <button 
-            class="hamburger__btn"
-            (click)="onShowMenu()"
-        >
-            <img src="assets/menu.svg" alt="menu icon">
-        </button>
-    </div>
-
-    <div class="nav__logo">
-        <a routerLink="/clientes/inicio"><img src="/assets/Logo.png" alt="Logo"></a>
-    </div>
-
-
-    <div class="nav__links" [ngClass]="{'nav__links--show':showMenu}">
-        <a class="nav__enlace" routerLink="/clientes/inicio" routerLinkActive="active-link" >Inicio</a>
-        <a class="nav__enlace" routerLink="/clientes/instrumentos" routerLinkActive="active-link" >Catálogo</a>
-        <a class="nav__enlace" routerLink="/nosotros" routerLinkActive="active-link" >Nosotros</a>
-        <form class="nav__search-form" (submit)="onSearch($event)">
-            <input 
-                type="text" 
-                [(ngModel)]="searchTerm"
-                name="searchTerm"
-                placeholder="Buscar instrumentos..." 
-                class="nav__search-input"
+        <div class="hamburger">
+            <button 
+                class="hamburger__btn"
+                (click)="onShowMenu()"
             >
-            <button type="submit" class="nav__search-button">
-                <span>Buscar</span>
+                <img src="assets/menu.svg" alt="menu icon">
             </button>
-        </form>
-        @if (getRol()==='ADMTlN') {
-            <a class="nav__enlace" routerLink="/administracion/" routerLinkActive="active-link" >Gestionar productos</a>
-        }
-        @if (usr) {
-            <div class="profile-menu">
-                <span class="profile-name">{{ usr.nombre }}</span> <!-- Muestra el nombre del usuario -->
-                <div class="dropdown-menu">
-                    <a routerLink="/auth/perfil" class="dropdown-item">Ver Perfil</a>
-                    <a routerLink="/clientes" (click)="logOut()" class="dropdown-item">Cerrar Sesión</a>
-                </div>
-            </div>
-        }@else {
-            <a class="nav__enlace" routerLink="/auth" >Iniciar Sesión</a>
-        }
-        <div class="nav__cart">
-            <a routerLink="/ventas/cart">
-                <img src="assets/iconCarrito.svg" alt="icono carrito">
-            </a>
         </div>
-    </div>
 
-    
+        <div class="nav__logo">
+            <a routerLink="/clientes/inicio"><img src="/assets/Logo.png" alt="Logo"></a>
+        </div>
+
+        <div class="breadcrumb-container" *ngIf="breadcrumbsVisible">
+            <app-breadcrumbs></app-breadcrumbs>
+        </div>
+
+        <div class="nav__links" [ngClass]="{'nav__links--show':showMenu}">
+            <a class="nav__enlace" routerLink="/clientes/inicio" routerLinkActive="active-link" >Inicio</a>
+            <a class="nav__enlace" routerLink="/clientes/instrumentos" routerLinkActive="active-link" >Catálogo</a>
+            <a class="nav__enlace" routerLink="/nosotros" routerLinkActive="active-link" >Nosotros</a>
+            <form class="nav__search-form" (submit)="onSearch($event)">
+                <input 
+                    type="text" 
+                    [(ngModel)]="searchTerm"
+                    name="searchTerm"
+                    placeholder="Buscar instrumentos..." 
+                    class="nav__search-input"
+                >
+                <button type="submit" class="nav__search-button">
+                    <span>Buscar</span>
+                </button>
+            </form>
+            @if (getRol()==='ADMTlN') {
+                <a class="nav__enlace" routerLink="/administracion/" routerLinkActive="active-link" >Gestionar productos</a>
+            }
+            @if (usr) {
+                <div class="profile-menu">
+                    <span class="profile-name">{{ usr.nombre }}</span> <!-- Muestra el nombre del usuario -->
+                    <div class="dropdown-menu">
+                        <a routerLink="/auth/perfil" class="dropdown-item">Ver Perfil</a>
+                        <a routerLink="/clientes" (click)="logOut()" class="dropdown-item">Cerrar Sesión</a>
+                    </div>
+                </div>
+            }@else {
+                <a class="nav__enlace" routerLink="/auth" >Iniciar Sesión</a>
+            }
+            <div class="nav__cart">
+                <a routerLink="/ventas/cart">
+                    <img src="assets/iconCarrito.svg" alt="icono carrito">
+                </a>
+            </div>
+        </div>
+        
 
 
-</nav>
+    </nav>

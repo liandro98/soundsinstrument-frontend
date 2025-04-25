@@ -13,10 +13,10 @@ const routes: Routes = [
         path: '',
         component: LayoutAdmPagesComponent,
         children: [
-            { path:'busqueda', component:AdministradorProductosComponent },
-            { path: 'nuevo', component: ProductoComponent  },
-            { path: 'edit/:id', component: ProductoComponent  },
-            { path: 'historial-ventas', component: HistorialComprasComponent
+            { path:'busqueda', component:AdministradorProductosComponent, data: { breadcrumb: 'Busqueda' } },
+            { path: 'nuevo', component: ProductoComponent, data: { breadcrumb: 'Nuevo producto' }  },
+            { path: 'edit/:id', component: ProductoComponent, data: { breadcrumb: 'Editar' }  },
+            { path: 'historial-ventas', component: HistorialComprasComponent, data: { breadcrumb: 'Historial' }
             },
             { path:'**', redirectTo:'busqueda'  }
         ]

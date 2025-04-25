@@ -6,7 +6,8 @@ import { HistorialComprasComponent } from "./pages/historial-compras/historial-c
 const routes: Routes = [
     {
         path: 'cart',
-        component: CarritoComponent
+        component: CarritoComponent,
+        data: { breadcrumb: 'Carrito' }
     },
     {
       path: '**',

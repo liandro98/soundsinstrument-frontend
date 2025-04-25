@@ -255,3 +255,32 @@
 .profile-menu:hover .dropdown-menu {
     display: block;
 }
+/* Breadcrumbs container positioning */
+.breadcrumb-container {
+    grid-column: 2;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .breadcrumb-container {
+      display: none;
+    }
+    
+    .nav {
+      grid-template-columns: auto 1fr;
+    }
+    
+    .nav__links {
+      grid-column: 2;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .nav {
+      grid-template-columns: auto minmax(200px, 1fr) auto;
+    }
+  }
