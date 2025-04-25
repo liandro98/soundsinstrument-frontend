@@ -83,3 +83,72 @@
         font-size: 2rem;
     }
 }
+
+/* Mapa del Sitio */
+.site-map {
+    background-color: var(--azul);
+    padding: 5rem 2rem;
+    color: var(--blanco);
+}
+
+.site-map__title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: var(--blanco);
+}
+
+.site-map__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-map__section {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.site-map__section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--blanco);
+    border-bottom: 2px solid var(--blanco);
+    padding-bottom: 0.5rem;
+}
+
+.site-map__links {
+    list-style: none;
+    padding: 0;
+}
+
+.site-map__links li {
+    margin-bottom: 1rem;
+}
+
+.site-map__links a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.5rem 0;
+}
+
+.site-map__links a:hover {
+    color: #aad3ff;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .site-map__container {
+        grid-template-columns: 1fr;
+    }
+    
+    .site-map__section {
+        text-align: center;
+    }
+}
