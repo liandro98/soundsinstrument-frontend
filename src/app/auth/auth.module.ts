@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
 import { MsgPageComponent } from './pages/msg-page/msg-page.component';
 import { ConfirmarPageComponent } from './pages/confirmar-page/confirmar-page.component';
@@ -52,6 +53,7 @@ import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.compo
     MatStepperModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatDialogModule,
     // Módulos de reCAPTCHA
     RecaptchaModule,
     RecaptchaFormsModule
