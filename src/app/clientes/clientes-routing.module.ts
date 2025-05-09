@@ -14,7 +14,7 @@ const routes: Routes = [
         component: LayoutcltPageComponent,
         children: [
             { path:'inicio', component:HomePageComponent, data: { breadcrumb: 'Inicio' } },
-            { path:'instrumentos', component:InstrumentosGeneralComponent, data: { breadcrumb: 'Instrumentos' } },
+            { path:'instrumentos', component:InstrumentosGeneralComponent, data: { breadcrumb: 'Catalogo' } },
             { path:'instrumento/:ins', component:ProductoDetallesComponent, data: { breadcrumb: 'Detalles' } },
             { path:'**', redirectTo:'inicio'  }
         ]

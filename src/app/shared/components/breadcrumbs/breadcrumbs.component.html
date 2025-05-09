@@ -1,20 +1,25 @@
 <div class="breadcrumb-container" *ngIf="breadcrumbs.length > 0">
-  <nav aria-label="breadcrumb">
+  <nav aria-label="Navegación">
     <ol class="breadcrumb-list">
-      <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let last = last">
-        <a 
-          *ngIf="!last; else lastItem"
-          class="breadcrumb-link" 
-          [routerLink]="breadcrumb.url"
-        >
-          {{ breadcrumb.label }}
+      <li class="breadcrumb-item" 
+          *ngFor="let breadcrumb of breadcrumbs; let last = last"
+          [attr.aria-current]="last ? 'page' : null">
+        
+        <a *ngIf="!last; else currentItem"
+           class="breadcrumb-link"
+           [routerLink]="breadcrumb.url">
+          {{ breadcrumb.label }} <!-- Filtro para acortar texto -->
         </a>
-        <ng-template #lastItem>
+        
+        <ng-template #currentItem>
           <span class="breadcrumb-current">
             {{ breadcrumb.label }}
           </span>
         </ng-template>
-        <span *ngIf="!last" class="breadcrumb-separator">/</span>
+        
+        <span *ngIf="!last" class="breadcrumb-separator" aria-hidden="true">
+          ›
+        </span>
       </li>
     </ol>
   </nav>

@@ -7,12 +7,12 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule),
-    data: { breadcrumb: 'Autenticación' }
+    data: {  }
   },
   {
     path: 'clientes',
     loadChildren: () => import('./clientes/clientes.module').then( m => m.ClientesModule ),
-    data: { breadcrumb: 'Clientes' }
+    data: {  }
   },
   {
     path: 'ventas',
@@ -24,12 +24,12 @@ const routes: Routes = [
     path: 'administracion',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate:[authGuard],
-    data: {expectedRole:'ADMTlN', breadcrumb: 'Administracion'},
+    data: {expectedRole:'ADMTlN'},
   },
   {
     path: 'nosotros',
     loadChildren: () => import('./nosotros/nosotros.module').then( m => m.NosotrosModule ),
-    data: { breadcrumb: 'Nosotros' }
+    data: { }
   },
   {
     path: '404',

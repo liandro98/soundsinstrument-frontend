@@ -1,52 +1,86 @@
+/* breadcrumbs.component.css */
 .breadcrumb-container {
-  display: flex;
-  padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: #1a1a1a; /* Fondo oscuro más neutro */
+  padding: 0.4rem 0.8rem;
   border-radius: 4px;
-  margin-left: auto;
+  margin: 0.3rem 0;
+  overflow-x: auto; /* Permite scroll horizontal en móviles */
+  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+  white-space: nowrap; /* Evita saltos de línea */
 }
 
 .breadcrumb-list {
-  display: flex;
-  list-style: none;
+  display: inline-flex; /* Para el scroll horizontal */
+  align-items: center;
+  gap: 0.2rem;
   margin: 0;
   padding: 0;
-  align-items: center;
-  flex-wrap: wrap;
+  list-style: none;
+  font-size: 0.75rem; /* Tamaño base más pequeño */
 }
 
 .breadcrumb-item {
   display: flex;
   align-items: center;
-  font-size: 1.4rem;
-  white-space: nowrap;
-  margin-right: 0.5rem;
+  flex-shrink: 0; /* Evita que se encojan los items */
+  gap: 0.2rem;
 }
 
 .breadcrumb-link {
-  color: #333;
+  color: #a0a0a0;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: all 0.2s ease;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
 }
 
 .breadcrumb-link:hover {
-  color: #0066cc;
-  text-decoration: underline;
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .breadcrumb-current {
-  color: #666;
-  font-weight: bold;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 0.2rem 0.4rem;
 }
 
 .breadcrumb-separator {
-  margin: 0 0.5rem;
-  color: #999;
+  color: #666666;
+  font-size: 0.6rem;
+  margin: 0 0.1rem;
 }
 
-/* Para móviles */
-@media (max-width: 768px) {
+/* Media Queries para ajustes específicos */
+@media (max-width: 480px) {
   .breadcrumb-container {
-    display: none;
+    padding: 0.3rem 0.6rem;
   }
+  
+  .breadcrumb-list {
+    font-size: 0.7rem; 
+  }
+  
+  .breadcrumb-link, 
+  .breadcrumb-current {
+    padding: 0.15rem 0.3rem;
+  }
+  
+  .breadcrumb-separator {
+    margin: 0 0.05rem;
+  }
+}
+
+/* Estilo para scrollbar (opcional) */
+.breadcrumb-container::-webkit-scrollbar {
+  height: 3px;
+}
+
+.breadcrumb-container::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 3px;
+}
+
+.breadcrumb-container::-webkit-scrollbar-track {
+  background: transparent;
 }
