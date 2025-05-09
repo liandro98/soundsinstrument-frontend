@@ -1,4 +1,5 @@
-    <nav class="nav">
+   <header>
+   <nav class="nav">
 
         <div class="hamburger">
             <button 
@@ -13,9 +14,6 @@
             <a routerLink="/clientes/inicio"><img src="/assets/Logo.png" alt="Logo"></a>
         </div>
 
-        <div class="breadcrumb-container" *ngIf="breadcrumbsVisible">
-            <app-breadcrumbs></app-breadcrumbs>
-        </div>
 
         <div class="nav__links" [ngClass]="{'nav__links--show':showMenu}">
             <a class="nav__enlace" routerLink="/clientes/inicio" routerLinkActive="active-link" >Inicio</a>
@@ -57,3 +55,8 @@
 
 
     </nav>
+    <div class="breadcrumb-wrapper" *ngIf="breadcrumbsVisible">
+    <app-breadcrumbs></app-breadcrumbs>
+  </div>
+
+    </header>
