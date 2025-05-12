@@ -1,0 +1,29 @@
+<div class="contenedor">
+    <app-nav-bar></app-nav-bar>
+</div>
+
+
+<div class="search-results-container">
+    <div class="search-header">
+        <p class="blanco-color">Resultados de búsqueda</p>
+        <p class="search-term blanco-color">Término buscado: <strong>{{ searchTerm }}</strong></p>
+    </div>
+
+    <div class="results-section" *ngIf="searchResults.length > 0">
+        <div class="result-item" *ngFor="let item of searchResults" (click)="navigateTo(item.path)">
+            <h2 class="result-title">{{ item.title }}</h2>
+            <p class="result-description">{{ item.description }}</p>
+            <a class="result-link" [routerLink]="[item.path]">Ir a {{ item.title }}</a>
+        </div>
+    </div>
+
+    <div class="no-results" *ngIf="noResults">
+        <p>No se encontraron resultados para <strong>"{{ searchTerm }}"</strong></p>
+        <p>Sugerencias:</p>
+        <ul>
+            <li>Verifica que todas las palabras estén escritas correctamente.</li>
+            <li>Prueba con diferentes palabras clave.</li>
+            <li>Prueba con términos más generales.</li>
+        </ul>
+    </div>
+</div>

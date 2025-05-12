@@ -12,6 +12,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ComentarioComponent } from './components/comentario/comentario.component';
 import { FormsModule } from '@angular/forms';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     SharedListadoProductosComponent,
     ComentarioComponent,
     BreadcrumbsComponent,
+    SearchResultsComponent,
   ],
   imports: [
     CommonModule,

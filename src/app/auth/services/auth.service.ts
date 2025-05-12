@@ -86,7 +86,23 @@ export class AuthService {
       headers = headers.append('Authorization', `Bearer ${token}`);
     }
     return this.http.get<RespuestaProducto>(`${this.baseURL}/auth/notify`,{headers});
+  }
 
+  /**
+   * Obtiene el rol del usuario actual desde el almacenamiento de sesión
+   * @returns El rol del usuario o null si no está autenticado
+   */
+  getCurrentUserRole(): string | null {
+    // Intentar obtener el rol del usuario desde sessionStorage
+    return sessionStorage.getItem('userRole');
+  }
+
+  /**
+   * Verifica si el usuario está actualmente logueado
+   * @returns true si el usuario está logueado, false en caso contrario
+   */
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('tkn');
   }
 
 }

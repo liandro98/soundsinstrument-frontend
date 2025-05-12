@@ -1,10 +1,11 @@
 .space {
-  height: 50dvh;
+  height: auto;
+  min-height: 50dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 0;
+  padding: 4rem 0 2rem 0; /* Added top padding to prevent overlap with breadcrumbs */
 }
 
 .space--nvProd {

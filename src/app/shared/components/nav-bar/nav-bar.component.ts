@@ -51,10 +51,11 @@ export class NavBarComponent implements OnInit {
   onSearch(event: Event): void {
     event.preventDefault();
     if (this.searchTerm.trim()) {
-      this.route.navigate(['/clientes/instrumentos'], {
-        queryParams: { search: this.searchTerm }
+      this.route.navigate(['/busqueda'], {
+        queryParams: { q: this.searchTerm }
       });
       this.searchTerm = '';
+      this.showMenu = false; // Close mobile menu if open
     }
   }
 

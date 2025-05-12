@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Error404PageComponent } from './shared/pages/error404-page/error404-page.component';
+import { SearchResultsComponent } from './shared/components/search-results/search-results.component';
 import { authGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
     path: 'nosotros',
     loadChildren: () => import('./nosotros/nosotros.module').then( m => m.NosotrosModule ),
     data: { }
+  },
+  {
+    path: 'busqueda',
+    component: SearchResultsComponent,
+    data: { breadcrumb: 'Resultados de búsqueda' }
   },
   {
     path: '404',
