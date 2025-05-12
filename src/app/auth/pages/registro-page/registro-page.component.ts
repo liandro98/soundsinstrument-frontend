@@ -49,9 +49,7 @@ function phoneNumberValidator(): ValidatorFn {
   styleUrls: ['./registro-page.component.css']
 })
 export class RegistroPageComponent implements OnInit {
-  personalFormGroup!: FormGroup;
-  securityFormGroup!: FormGroup;
-  additionalFormGroup!: FormGroup;
+  registroForm!: FormGroup;
   public msg: Msg = { title: '', msg: '' };
   public isSubmitting = false;
 
@@ -62,17 +60,16 @@ export class RegistroPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.personalFormGroup = this._formBuilder.group({
+    this.registroForm = this._formBuilder.group({
+      // Información Personal
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       apellido: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-    });
-
-    this.securityFormGroup = this._formBuilder.group({
+      
+      // Seguridad
       pass: ['', [Validators.required, createPasswordStrengthValidator()]],
-    });
-
-    this.additionalFormGroup = this._formBuilder.group({
+      
+      // Información Adicional
       phone: ['', [Validators.required, phoneNumberValidator()]],
       direccion: ['', [Validators.required, Validators.minLength(5)]]
     });
@@ -81,28 +78,20 @@ export class RegistroPageComponent implements OnInit {
   onSubmit(): void {
     if (this.isSubmitting) return;
     
-    if (this.personalFormGroup.invalid || 
-        this.securityFormGroup.invalid || 
-        this.additionalFormGroup.invalid) {
-      this.markAllAsTouched();
+    if (this.registroForm.invalid) {
+      this.registroForm.markAllAsTouched();
       return;
     }
 
     this.isSubmitting = true;
     
-    const formData: Usuario = {
-      ...this.personalFormGroup.value,
-      ...this.securityFormGroup.value,
-      ...this.additionalFormGroup.value,
-    };
+    const formData: Usuario = this.registroForm.value;
 
     this.register(formData);
   }
 
   private markAllAsTouched(): void {
-    this.personalFormGroup.markAllAsTouched();
-    this.securityFormGroup.markAllAsTouched();
-    this.additionalFormGroup.markAllAsTouched();
+    this.registroForm.markAllAsTouched();
   }
 
   register(user: Usuario) {

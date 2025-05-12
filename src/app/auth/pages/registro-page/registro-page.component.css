@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 4rem 1rem 2rem;
   box-sizing: border-box;
 }
 
@@ -51,6 +51,27 @@
   border-radius: .5rem;
   width: 100%;
   overflow-x: hidden;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  color: var(--azul);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.registro-form {
+  padding: 1rem;
 }
 
 mat-form-field {
