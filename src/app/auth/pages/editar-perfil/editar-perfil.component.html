@@ -1,3 +1,7 @@
+<div class="contenedor">
+<app-nav-bar></app-nav-bar>
+</div>
+
 <div class="space--nvProd">
 
 <div class="perfil__contenedor">
@@ -10,29 +14,32 @@
       </div>
       <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" formControlName="nombre" placeholder="Introduce tu nombre">
+        <input type="text" id="nombre" formControlName="nombre" [readonly]="!modoEdicion" placeholder="Introduce tu nombre">
   
         <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" formControlName="apellido" placeholder="Introduce tu apellido">
+        <input type="text" id="apellido" formControlName="apellido" [readonly]="!modoEdicion" placeholder="Introduce tu apellido">
   
         <label for="direccion">Dirección</label>
-        <input type="text" id="direccion" formControlName="direccion" placeholder="Introduce tu dirección">
+        <input type="text" id="direccion" formControlName="direccion" [readonly]="!modoEdicion" placeholder="Introduce tu dirección">
 
         <div class="estante-form">
             <div class="campo">
                 <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" formControlName="email" placeholder="Introduce tu correo electrónico">
+                <input type="email" id="email" formControlName="email" [readonly]="!modoEdicion" placeholder="Introduce tu correo electrónico">
             </div>
 
             <div class="campo">
                 <label for="phone">Teléfono</label>
-                <input type="text" id="phone" formControlName="phone" placeholder="Introduce tu número de teléfono">
+                <input type="text" id="phone" formControlName="phone" [readonly]="!modoEdicion" placeholder="Introduce tu número de teléfono">
             </div>
 
         </div>
   
         <div class="btn__cont">
-          <input class="btn-Original" type="submit" [disabled]="perfilForm.invalid" value="Guardar Cambios">
+          <!-- Mostrar botón de guardar solo si está en modo edición -->
+          <input *ngIf="modoEdicion" class="btn-Original" type="submit" [disabled]="perfilForm.invalid" value="Guardar Cambios">
+          <!-- Botón para habilitar edición si no está en modo edición -->
+          <button *ngIf="!modoEdicion" type="button" class="btn-Original" (click)="habilitarEdicion()">Editar información</button>
         </div>
       </form>
       <div class="btn__cont">
@@ -41,4 +48,3 @@
     </div>
   </div>
 </div>
-  
