@@ -1,11 +1,13 @@
-import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Producto } from '../../../shared/interfaces/producto';
 import { ProductoService } from '../../../shared/services/producto.service';
-import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRoute, Router, RouterStateSnapshot, NavigationEnd } from '@angular/router';
 import { ComentarioService } from '../../services/comentario.service';
 import { Comentario } from '../../../auth/intefaces/comentario';
 import { CartService } from '../../../ventas/services/cart.service';
 import { Message } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { Message } from 'primeng/api';
   templateUrl: './producto-detalles.component.html',
   styleUrl: './producto-detalles.component.css'
 })
-export class ProductoDetallesComponent implements OnInit {
+export class ProductoDetallesComponent implements OnInit, OnDestroy {
 
   public producto: Producto = { _id: '', nombre: '', descripcion: '', precio: 0 };
   public calif = 0;
@@ -23,6 +25,8 @@ export class ProductoDetallesComponent implements OnInit {
   @ViewChild('cantidad') cantidad!: ElementRef; // Referencia a cantidad
   public messages: Message[] = [];
   public productosFilt:Producto[]=[];
+  private routeSubscription: Subscription | undefined;
+  private routerSubscription: Subscription | undefined;
 
   constructor(
     private productoService: ProductoService,
@@ -39,13 +43,31 @@ export class ProductoDetallesComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.id = '';
-    this.activatedRouter.params
+    
+    // Suscripción a los cambios de parámetros de la ruta actual
+    this.routeSubscription = this.activatedRouter.params
       .subscribe(params => {
         this.id = params['ins'];
+        this.obtenerProducto(this.id);
       }
     );
     
-    this.obtenerProducto(this.id);
+    // Suscripción a los eventos de navegación para detectar cambios en la URL
+    this.routerSubscription = this.route.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo(0, 0);
+    });
+  }
+  
+  ngOnDestroy(): void {
+    // Cancelar suscripciones para evitar memory leaks
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
   
   obtenerProducto(id: Producto['_id']) {
@@ -110,7 +132,8 @@ export class ProductoDetallesComponent implements OnInit {
     this.productoService.getProductosFiltrados({categoria})
       .subscribe(resp => {
         console.log(resp);
-        this.productosFilt = resp.data;
+        // Filtrar para excluir el producto actual por ID
+        this.productosFilt = resp.data.filter((producto: Producto) => producto._id !== this.id);
     });
   }
 

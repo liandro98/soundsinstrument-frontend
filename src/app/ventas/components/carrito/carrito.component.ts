@@ -33,14 +33,7 @@ export class CarritoComponent implements OnInit {
 
   ///
   ngOnInit(): void {
-    this.cartSvs.fetchCart()
-      .subscribe(
-        resp => {
-          this.cart = resp.data.productos;
-          this.carTotal = resp.data.total
-          console.log(resp);
-        }
-      );
+    this.actualizarCarrito();
 
     this.renderPayPalButton();
 
@@ -55,6 +48,18 @@ export class CarritoComponent implements OnInit {
         })
     }
   }
+  
+  // Método para actualizar el carrito
+  actualizarCarrito() {
+    this.cartSvs.fetchCart()
+      .subscribe(
+        resp => {
+          this.cart = resp.data.productos;
+          this.carTotal = resp.data.total
+          console.log(resp);
+        }
+      );
+  }
 
 
   // Funcion para quitar elementos del array
@@ -65,6 +70,8 @@ export class CarritoComponent implements OnInit {
       .subscribe(
         resp => {
           console.log(resp);
+          // Actualizar el carrito después de eliminar un producto
+          this.actualizarCarrito();
         }
       );
   }
@@ -76,6 +83,8 @@ export class CarritoComponent implements OnInit {
       .subscribe(
         resp => {
           console.log(resp);
+          // Actualizar el carrito después de incrementar la cantidad
+          this.actualizarCarrito();
         }
       );
   }
@@ -87,13 +96,19 @@ export class CarritoComponent implements OnInit {
       .subscribe(
         resp => {
           console.log(resp);
+          // Actualizar el carrito después de decrementar la cantidad
+          this.actualizarCarrito();
         }
       );
   }
 
   // Funcion para limpiar el carrito
   clearCart() {
-    this.cartSvs.borrarTodo().subscribe(resp => console.log(resp));
+    this.cartSvs.borrarTodo().subscribe(resp => {
+      console.log(resp);
+      // Actualizar el carrito después de vaciarlo
+      this.actualizarCarrito();
+    });
   }
 
 
