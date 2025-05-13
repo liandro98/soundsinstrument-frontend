@@ -1,9 +1,8 @@
 /* breadcrumbs.component.css */
 .breadcrumb-container {
-  background: #1a1a1a; /* Fondo oscuro más neutro */
+  background: transparent; /* Quitamos el fondo */
   padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  margin: 0.3rem 0;
+  margin: 0.5rem 0;
   overflow-x: auto; /* Permite scroll horizontal en móviles */
   -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
   white-space: nowrap; /* Evita saltos de línea */
@@ -12,11 +11,11 @@
 .breadcrumb-list {
   display: inline-flex; /* Para el scroll horizontal */
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.4rem;
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 0.75rem; /* Tamaño base más pequeño */
+  font-size: 1.8rem; /* Tamaño de letra más grande */
 }
 
 .breadcrumb-item {
@@ -27,28 +26,28 @@
 }
 
 .breadcrumb-link {
-  color: #a0a0a0;
+  color: white;
   text-decoration: none;
   transition: all 0.2s ease;
   padding: 0.2rem 0.4rem;
-  border-radius: 3px;
+  font-weight: 900;
 }
 
 .breadcrumb-link:hover {
-  color: #e0e0e0;
-  background: rgba(255, 255, 255, 0.08);
+  color: #333333;
+  text-decoration: underline;
 }
 
 .breadcrumb-current {
-  color: #ffffff;
-  font-weight: 500;
+  color:  #a0a0a0;;
+  font-weight: 700;
   padding: 0.2rem 0.4rem;
 }
 
 .breadcrumb-separator {
-  color: #666666;
-  font-size: 0.6rem;
-  margin: 0 0.1rem;
+  color: #999999;
+  font-size: 1.9rem;
+  margin: 0 0.2rem;
 }
 
 /* Media Queries para ajustes específicos */
@@ -58,7 +57,7 @@
   }
   
   .breadcrumb-list {
-    font-size: 0.7rem; 
+    font-size: 0.9rem; /* Ajustamos para móviles */
   }
   
   .breadcrumb-link, 
@@ -67,7 +66,7 @@
   }
   
   .breadcrumb-separator {
-    margin: 0 0.05rem;
+    margin: 0 0.1rem;
   }
 }
 

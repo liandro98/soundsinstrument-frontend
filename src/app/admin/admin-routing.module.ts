@@ -13,7 +13,7 @@ const routes: Routes = [
         path: '',
         component: LayoutAdmPagesComponent,
         children: [
-            { path:'busqueda', component:AdministradorProductosComponent, data: { breadcrumb: 'Busqueda' } },
+            { path:'busqueda', component:AdministradorProductosComponent, data: { breadcrumb: 'Gestionar Productos' } },
             { path: 'nuevo', component: ProductoComponent, data: { breadcrumb: 'Nuevo producto' }  },
             { path: 'edit/:id', component: ProductoComponent, data: { breadcrumb: 'Editar' }  },
             { path: 'historial-ventas', component: HistorialComprasComponent, data: { breadcrumb: 'Historial' }
