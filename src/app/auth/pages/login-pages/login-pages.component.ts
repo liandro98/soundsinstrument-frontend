@@ -8,19 +8,24 @@ import { Message } from 'primeng/api';
 @Component({
   selector: 'app-login-pages',
   templateUrl: './login-pages.component.html',
-  styleUrl: './login-pages.component.css'
+  styleUrls: ['./login-pages.component.css']
 })
 export class LoginPagesComponent implements OnInit {
-
   public loginForm!: FormGroup;
+  public verificationForm!: FormGroup;
   public messages: Message[] = [];
   public captchaResolved: boolean = false;
   public showRecaptchaError: boolean = false;
   public showInputErrors: boolean = false;
+  public showVerificationStep: boolean = false;
+  public isLoading: boolean = false;
+  public emailForVerification: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
-
-  }
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -28,138 +33,202 @@ export class LoginPagesComponent implements OnInit {
       pass: ['', Validators.required],
       recaptcha: ['', Validators.required]
     });
-    
-    // Inicialmente no mostrar errores
+
+    this.verificationForm = this.fb.group({
+      verificationCode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]]
+    });
+
     this.showInputErrors = false;
   }
 
   onSubmit() {
-    // Primero, desactivar los errores para poder reactivarlos y que se vea la animación
     this.showInputErrors = false;
     
-    // Esperar un breve momento y luego mostrar los errores
     setTimeout(() => {
-      // Mostrar errores en los campos si el formulario no es válido
       this.showInputErrors = true;
       
-      // Verificar si hay campos inválidos
       if (this.loginForm.invalid) {
-        // Encontrar el primer campo inválido y hacer scroll hacia él
-        const invalidControls: string[] = [];
-        
-        if (this.loginForm.get('email')?.invalid) {
-          invalidControls.push('email');
-        }
-        
-        if (this.loginForm.get('pass')?.invalid) {
-          invalidControls.push('pass');
-        }
-        
-        if (invalidControls.length > 0) {
-          setTimeout(() => {
-            const firstInvalidControl = document.getElementById(invalidControls[0]);
-            if (firstInvalidControl) {
-              firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              firstInvalidControl.focus();
-              
-              // Aplicar y quitar la clase para reiniciar la animación
-              firstInvalidControl.classList.remove('input-error');
-              setTimeout(() => {
-                firstInvalidControl.classList.add('input-error');
-              }, 10);
-            }
-          }, 100);
-          
-          this.messages = [
-            { severity: 'error', detail: 'Por favor, completa todos los campos requeridos' }
-          ];
-          
-          return;
-        }
+        this.handleFormErrors();
+        return;
       }
     }, 10);
     
-    // Verificar si el reCAPTCHA está resuelto
     if (!this.captchaResolved) {
-      // Reiniciar la animación quitando y volviendo a aplicar la clase
-      this.showRecaptchaError = false;
-      setTimeout(() => {
-        this.showRecaptchaError = true;
-      }, 10);
-      
-      this.messages = [
-        { severity: 'error', detail: 'Por favor, verifica que no eres un robot' }
-      ];
-      
-      // Hacer scroll al contenedor del reCAPTCHA para asegurar que sea visible
-      setTimeout(() => {
-        const recaptchaElement = document.querySelector('.recaptcha-container');
-        if (recaptchaElement) {
-          recaptchaElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 100);
-      
+      this.handleCaptchaError();
       return;
     }
     
     if (this.loginForm.valid && this.captchaResolved) {
-      // Ocultar mensajes de error
       this.showRecaptchaError = false;
       this.showInputErrors = false;
       
       const email = this.loginForm.get('email')!.value;
       const pass = this.loginForm.get('pass')!.value;
-      // Aquí puedes enviar los datos del formulario, por ejemplo, a un servicio
-      this.log(email, pass);
+      
+      this.login(email, pass);
     }
   }
 
-  log(email: Usuario['email'], pass: Usuario['pass']) {
-    this.authService.autenticarUsusrio(email, pass).
-      subscribe(resp => {
-        if (resp.status != 'error') {
-          window.sessionStorage.setItem('rol', resp.data.rol);
-          window.sessionStorage.setItem('tkn', resp.data.tkn);
-          // Verifica si hay una URL de redirección almacenada
-          const redirectUrl = sessionStorage.getItem('redirectUrl');
-          console.log(redirectUrl); 
-          if (redirectUrl) {
-            this.router.navigateByUrl(redirectUrl); // Redirige a la URL original
-            sessionStorage.removeItem('redirectUrl'); // Limpia el valor de `redirectUrl`
-          } else {
-            this.router.navigate(['/clientes/inicio']); // O redirige a la página principal u otra por defecto
-          }
-        } else {
-          // Verificar si el mensaje es que el usuario no existe
-          if (resp.msg && resp.msg.includes('no existe')) {
-            this.messages = [
-              { severity: 'error', detail: 'Este usuario no ha sido registrado' },
-            ];
-          } else {
-            this.messages = [
-              { severity: 'error', detail: resp.msg },
-            ];
-          }
-        }
-        console.log(resp);
-        
-      });
+  onVerify() {
+    if (this.verificationForm.invalid) {
+      this.messages = [
+        { severity: 'error', detail: 'Por favor, introduce un código de verificación válido (6 dígitos)' }
+      ];
+      return;
+    }
 
-
-
+    const code = this.verificationForm.get('verificationCode')!.value;
+    this.verifyCode(code);
   }
 
-  /**
-   * Mu00e9todo que se ejecuta cuando el captcha es resuelto
-   * @param response Respuesta del captcha
-   */
+  login(email: Usuario['email'], pass: Usuario['pass']) {
+    this.isLoading = true;
+    this.messages = [];
+
+    this.authService.autenticarUsuario(email, pass).subscribe({
+      next: (resp) => {
+        this.isLoading = false;
+        
+        if (resp.status === 'error') {
+          this.handleLoginError(resp);
+          return;
+        }
+
+        if (resp.data?.requiresVerification) {
+          // Mostrar paso de verificación
+          this.showVerificationStep = true;
+          this.emailForVerification = email;
+          this.messages = [
+            { 
+              severity: 'success', 
+              detail: 'Hemos enviado un código de verificación a tu correo electrónico. Por favor, introdúcelo a continuación.' 
+            }
+          ];
+        } else {
+          // Login exitoso sin verificación
+          this.handleSuccessfulLogin(resp);
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.messages = [
+          { severity: 'error', detail: 'Error en el servidor. Por favor, intenta nuevamente.' }
+        ];
+        console.error('Error en login:', err);
+      }
+    });
+  }
+
+  verifyCode(code: string) {
+    this.isLoading = true;
+    this.messages = [];
+
+    this.authService.autenticarSegundoPaso(code).subscribe({
+      next: (resp) => {
+        this.isLoading = false;
+        
+        if (resp.status === 'error') {
+          this.messages = [
+            { severity: 'error', detail: resp.msg || 'Código de verificación incorrecto' }
+          ];
+          return;
+        }
+
+        this.handleSuccessfulLogin(resp);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.messages = [
+          { severity: 'error', detail: err.message || 'Error al verificar el código' }
+        ];
+        console.error('Error en verify:', err);
+      }
+    });
+  }
+
+  private handleFormErrors() {
+    const invalidControls: string[] = [];
+    
+    if (this.loginForm.get('email')?.invalid) {
+      invalidControls.push('email');
+    }
+    
+    if (this.loginForm.get('pass')?.invalid) {
+      invalidControls.push('pass');
+    }
+    
+    if (invalidControls.length > 0) {
+      setTimeout(() => {
+        const firstInvalidControl = document.getElementById(invalidControls[0]);
+        if (firstInvalidControl) {
+          firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstInvalidControl.focus();
+          firstInvalidControl.classList.remove('input-error');
+          setTimeout(() => {
+            firstInvalidControl.classList.add('input-error');
+          }, 10);
+        }
+      }, 100);
+      
+      this.messages = [
+        { severity: 'error', detail: 'Por favor, completa todos los campos requeridos' }
+      ];
+    }
+  }
+
+  private handleCaptchaError() {
+    this.showRecaptchaError = false;
+    setTimeout(() => {
+      this.showRecaptchaError = true;
+    }, 10);
+    
+    this.messages = [
+      { severity: 'error', detail: 'Por favor, verifica que no eres un robot' }
+    ];
+    
+    setTimeout(() => {
+      const recaptchaElement = document.querySelector('.recaptcha-container');
+      if (recaptchaElement) {
+        recaptchaElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  }
+
+  private handleLoginError(resp: any) {
+    if (resp.msg && resp.msg.includes('no existe')) {
+      this.messages = [
+        { severity: 'error', detail: 'Este usuario no ha sido registrado' },
+      ];
+    } else {
+      this.messages = [
+        { severity: 'error', detail: resp.msg },
+      ];
+    }
+  }
+
+  private handleSuccessfulLogin(resp: any) {
+    window.sessionStorage.setItem('rol', resp.data.rol);
+    window.sessionStorage.setItem('tkn', resp.data.tkn);
+    
+    const redirectUrl = sessionStorage.getItem('redirectUrl');
+    if (redirectUrl) {
+      this.router.navigateByUrl(redirectUrl);
+      sessionStorage.removeItem('redirectUrl');
+    } else {
+      this.router.navigate(['/clientes/inicio']);
+    }
+  }
+
+  backToLogin() {
+    this.showVerificationStep = false;
+    this.verificationForm.reset();
+    this.messages = [];
+  }
+
   resolved(response: string) {
     this.captchaResolved = !!response;
   }
 
-  /**
-   * Mu00e9todo que se ejecuta cuando el captcha expira
-   */
   onCaptchaExpired() {
     this.captchaResolved = false;
   }

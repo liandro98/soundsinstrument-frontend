@@ -4,16 +4,11 @@
 
 <div class="space">
   <div class="login__contenedor">
-    <!-- Login contendor -->
-
-    <div class="login-container">
+    <!-- Contenedor de Login -->
+    <div class="login-container" *ngIf="!showVerificationStep">
       <h2>Iniciar Sesión</h2>
       <div class="card">
-        <p-messages
-          [(value)]="messages"
-          [enableService]="false"
-          [closable]="false"
-        />
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
       </div>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <label for="email">Correo Electrónico</label>
@@ -57,19 +52,54 @@
           <input
             class="btn-Original"
             type="submit"
-            [disabled]="loginForm.invalid || !captchaResolved"
-            value="Login"
+            [disabled]="loginForm.invalid || !captchaResolved || isLoading"
+            [value]="isLoading ? 'Cargando...' : 'Iniciar Sesión'"
           />
         </div>
       </form>
       <nav class="login__nav">
         <a routerLink="/auth/registro"><strong>¿No tienes cuenta? </strong></a>
-        <a routerLink="/auth/recuperar-cuenta"
-          ><strong>¿Olvidaste tu contraseña?</strong></a
-        >
+        <a routerLink="/auth/recuperar-cuenta"><strong>¿Olvidaste tu contraseña?</strong></a>
       </nav>
       <div class="btn__cont">
         <a class="btn-Original--ch" routerLink="/clientes/inicio">Volver</a>
+      </div>
+    </div>
+
+    <!-- Contenedor de Verificación -->
+    <div class="login-container" *ngIf="showVerificationStep">
+      <h2>Verificación en Dos Pasos</h2>
+      <div class="card">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
+      </div>
+      <p>Hemos enviado un código de verificación a <strong>{{emailForVerification}}</strong></p>
+      
+      <form [formGroup]="verificationForm" (ngSubmit)="onVerify()">
+        <label for="verificationCode">Código de Verificación</label>
+        <input
+          type="text"
+          id="verificationCode"
+          formControlName="verificationCode"
+          placeholder="Introduce el código de 6 dígitos"
+          maxlength="6"
+          [ngClass]="{'input-error': verificationForm.get('verificationCode')?.invalid && verificationForm.get('verificationCode')?.touched}"
+        />
+        <small *ngIf="verificationForm.get('verificationCode')?.invalid && verificationForm.get('verificationCode')?.touched" class="error-message">
+          Por favor, introduce un código de 6 dígitos
+        </small>
+
+        <div class="login-button">
+          <input
+            class="btn-Original"
+            type="submit"
+            [disabled]="verificationForm.invalid || isLoading"
+            [value]="isLoading ? 'Verificando...' : 'Verificar Código'"
+          />
+        </div>
+      </form>
+
+      <div class="btn__cont">
+        <button class="btn-Original--ch" (click)="backToLogin()">Volver al login</button>
       </div>
     </div>
   </div>

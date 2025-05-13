@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { RespuestaProducto } from '../../shared/interfaces/respuestaProducto';
 import { Usuario } from '../../shared/interfaces/usuario';
 
@@ -12,6 +12,9 @@ import { Usuario } from '../../shared/interfaces/usuario';
 export class AuthService {
 
   private baseURL: string = environment.API;
+
+  private requiresVerification = false;
+  private pendingEmail = '';
 
   getBaseURL() {
     return this.baseURL;
@@ -33,9 +36,30 @@ export class AuthService {
     return this.http.get<RespuestaProducto>(`${this.getBaseURL()}${url}`);
   }
 
-  autenticarUsusrio(email: string, pass: string): Observable<RespuestaProducto> {
-    const url = `/auth/login`; // api
-    return this.http.post<RespuestaProducto>(`${this.getBaseURL()}${url}`, { email, pass });
+  autenticarUsuario(email: string, pass: string): Observable<RespuestaProducto> {
+    const url = `/auth/login`;
+    return this.http.post<RespuestaProducto>(`${this.getBaseURL()}${url}`, { email, pass })
+      .pipe(
+        tap((response) => {
+          if (response.data?.requiresVerification) {
+            this.requiresVerification = true;
+            this.pendingEmail = email;
+          }
+        }),
+        catchError((error) => throwError(() => error))
+      );
+  }
+
+  autenticarSegundoPaso(code: string): Observable<RespuestaProducto> {
+    if (!this.requiresVerification || !this.pendingEmail) {
+      return throwError(() => new Error('No hay una verificación pendiente'));
+    }
+
+    const url = `/auth/verify`;
+    return this.http.post<RespuestaProducto>(`${this.getBaseURL()}${url}`, {
+      email: this.pendingEmail,
+      code
+    });
   }
 
   solicitarNvPass(email: Usuario['nombre']): Observable<RespuestaProducto> {
