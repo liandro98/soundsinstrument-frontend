@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-producto-form-admin',
   templateUrl: './producto.component.html',
-  styleUrl: '../../../auth/pages/login-pages/login-pages.component.css'
+  styleUrls: ['../../../auth/pages/login-pages/login-pages.component.css']
 })
 export class ProductoComponent implements OnInit {
 

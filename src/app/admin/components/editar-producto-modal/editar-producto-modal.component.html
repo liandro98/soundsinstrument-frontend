@@ -1,0 +1,54 @@
+<p-dialog [header]="'Editar Producto'" [(visible)]="visible" [modal]="true" [style]="{width: '98%', maxWidth: '1200px'}" [draggable]="false" [resizable]="false" (onShow)="onShow()">
+  <div class="card">
+    <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+  </div>
+  <div class="producto-form-container">
+    <form [formGroup]="productoForm" *ngIf="productoForm">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Introduce el nombre del producto">
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Introduce una descripción"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="precio">Precio</label>
+          <input type="number" id="precio" formControlName="precio" placeholder="Introduce el precio">
+        </div>
+
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" id="cantidad" formControlName="cantidad" placeholder="Introduce la cantidad disponible">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="categoria">Categoría</label>
+        <select id="categoria" formControlName="categoria">
+          <option value="">Selecciona una categoría</option>
+          <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="estante">Estante</label>
+          <input type="text" id="estante" formControlName="estante" placeholder="Introduce el estante donde se ubica">
+        </div>
+
+        <div class="form-group">
+          <label for="seccionEstante">Sección del Estante</label>
+          <input type="text" id="seccionEstante" formControlName="seccionEstante" placeholder="Introduce la sección del estante">
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn-Original--ch" (click)="guardarCambios()" [disabled]="productoForm?.invalid">Guardar Cambios</button>
+    <button type="button" class="btn-Original--ch" (click)="cancelar()">Cancelar</button>
+  </ng-template>
+</p-dialog>

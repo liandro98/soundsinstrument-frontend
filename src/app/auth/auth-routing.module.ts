@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'registro', component: RegistroPageComponent, data: { breadcrumb: 'Registro' } },
       { path: 'confirmar', component: ConfirmarPageComponent, data: { breadcrumb: 'Confirmar' } },
       { path: 'confirmar/:tkn', component: ConfirmarPageComponent},
-      { path: 'recuperar-cuenta', component: OlvidePassComponent, data: { breadcrumb: 'Confirmar' } },
+      { path: 'recuperar-cuenta', component: OlvidePassComponent, data: { breadcrumb: 'Restablecer contraseña' } },
       { path: 'nueva-pass', component: NuevaPassComponent, data: { breadcrumb: 'Restlabecer password' } },
       { path: 'nueva-pass/:tkn', component: NuevaPassComponent },
       { path: 'perfil', component:PerfilComponent, data: { breadcrumb: 'Perfil' }},

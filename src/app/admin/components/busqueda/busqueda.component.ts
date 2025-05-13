@@ -6,7 +6,7 @@ import { Producto } from '../../../shared/interfaces/producto';
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
-  styleUrl: './busqueda.component.css'
+  styleUrls: ['./busqueda.component.css']
 })
 export class BusquedaComponent implements OnInit{
   busquedaForm: FormGroup;

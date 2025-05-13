@@ -1,0 +1,84 @@
+.producto-form-container {
+  padding: 2rem;
+  background-color: white;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #000000;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  background-color: white;
+  color: #000000;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.btn-Original {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-Original:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.btn-Original--ch {
+  background-color: #FF8C00;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-Original:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+}
+
+.btn-Original--ch:hover {
+  background-color: #FF6F00;
+  transform: translateY(-2px);
+}

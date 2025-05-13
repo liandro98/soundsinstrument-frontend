@@ -8,11 +8,16 @@ import { Message } from 'primeng/api';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrl: './listado.component.css'
+  styleUrls: ['./listado.component.css']
 })
 export class ListadoComponent {
 
   @Input('prods') prods:Producto[] = [];
+  
+  // Variables para el modal de edición
+  modalVisible: boolean = false;
+  productoIdSeleccionado: Producto['_id'] = '';
+  
   constructor(
     private productosService: ProductoService, 
     private router:Router) {}
@@ -33,12 +38,28 @@ export class ListadoComponent {
    
   
 
-  editProduct(product: Producto['_id']) {
-    // Lógica para modificar el producto
-    //this.productosService.setModificando(true);
-    //this.productosService.setProducto(product)
-    this.router.navigate(['/administracion/edit',product]);
-
+  // Método para abrir el modal de edición
+  abrirModalEdicion(productoId: Producto['_id']) {
+    this.productoIdSeleccionado = productoId;
+    this.modalVisible = true;
+  }
+  
+  // Método para actualizar un producto en la lista después de editarlo
+  actualizarProductoEnLista(productoActualizado: Producto) {
+    // Buscar el índice del producto en la lista
+    const index = this.prods.findIndex(p => p._id === productoActualizado._id);
+    
+    if (index !== -1) {
+      // Guardar la imagen original
+      const imagenOriginal = this.prods[index].imagen;
+      
+      // Actualizar el producto en la lista manteniendo la imagen original
+      this.prods[index] = {
+        ...this.prods[index],
+        ...productoActualizado,
+        imagen: imagenOriginal // Aseguramos que la imagen no cambie
+      };
+    }
   }
 
   crearProducto(){

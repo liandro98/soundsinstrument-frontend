@@ -23,7 +23,7 @@
         <td>{{ product.cantidad }}</td>
         <td id="col-acciones" >
           <div class="btns-c" >
-            <button id="btn-editar" class="btn-Original-azul" (click)="editProduct(product._id!)">Modificar</button>
+            <button id="btn-editar" class="btn-Original-azul" (click)="abrirModalEdicion(product._id!)">Modificar</button>
             <button id="btn-eliminar" class="btn-Original"  (click)="deleteProduct(product._id!)">Eliminar</button>
           </div>
         </td>
@@ -31,3 +31,10 @@
     }
     </tbody>
   </table>
+
+<!-- Modal de edición de productos -->
+<app-editar-producto-modal 
+  [(visible)]="modalVisible" 
+  [productoId]="productoIdSeleccionado"
+  (productoActualizado)="actualizarProductoEnLista($event)">
+</app-editar-producto-modal>

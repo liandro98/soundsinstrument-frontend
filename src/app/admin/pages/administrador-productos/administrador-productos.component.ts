@@ -5,7 +5,7 @@ import { Producto } from '../../../shared/interfaces/producto';
 @Component({
   selector: 'app-administrador-productos',
   templateUrl: './administrador-productos.component.html',
-  styleUrl: './administrador-productos.component.css'
+  styleUrls: ['./administrador-productos.component.css']
 })
 export class AdministradorProductosComponent {
   modificando: boolean = false;
