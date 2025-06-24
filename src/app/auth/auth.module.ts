@@ -25,6 +25,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { NuevaPassComponent } from './pages/nueva-pass/nueva-pass.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.compo
     AlertaComponent,
     NuevaPassComponent,
     PerfilComponent,
-    EditarPerfilComponent
+    EditarPerfilComponent,
+    PrivacyComponent
   ],
   imports: [
     CommonModule,

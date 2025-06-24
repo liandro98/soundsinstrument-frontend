@@ -10,6 +10,7 @@ import { NuevaPassComponent } from './pages/nueva-pass/nueva-pass.component';
 import { publicGuard } from './guards/public.guard';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'nueva-pass/:tkn', component: NuevaPassComponent },
       { path: 'perfil', component:PerfilComponent, data: { breadcrumb: 'Perfil' }},
       { path: 'edit-perfil', component:EditarPerfilComponent, data: { breadcrumb: 'Editar perfil' } },
+      { path: 'politicas', component:PrivacyComponent},
       { path: '**', redirectTo: 'login' }
     ]
   },
