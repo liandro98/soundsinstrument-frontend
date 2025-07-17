@@ -48,7 +48,7 @@
     </form>
   </div>
   <ng-template pTemplate="footer">
-    <button type="button" class="btn-Original--ch" (click)="guardarCambios()" [disabled]="productoForm?.invalid">Guardar Cambios</button>
+    <button (click)="guardarCambios()" [disabled]="productoForm.invalid">Guardar Cambios</button>
     <button type="button" class="btn-Original--ch" (click)="cancelar()">Cancelar</button>
   </ng-template>
 </p-dialog>
