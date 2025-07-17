@@ -1,7 +1,7 @@
-import { Component, ElementRef, inject, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Producto } from '../../../shared/interfaces/producto';
 import { ProductoService } from '../../../shared/services/producto.service';
-import { ActivatedRoute, Router, RouterStateSnapshot, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ComentarioService } from '../../services/comentario.service';
 import { Comentario } from '../../../auth/intefaces/comentario';
 import { CartService } from '../../../ventas/services/cart.service';
@@ -109,7 +109,6 @@ export class ProductoDetallesComponent implements OnInit, OnDestroy {
   aggCart(): void {
     if (window.sessionStorage.getItem('rol')) {
       const cantidad: Producto['cantidad'] = this.cantidad.nativeElement.value;
-      //console.log(cantidad);
       if(cantidad! > this.producto.cantidad!){
         this.messages = [{ severity: 'error', detail: "No puedes agregar más productos de los disponibles!" }]; 
         return;

@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { AdminProductos } from '../../admin-productos';
 import { ProductoService } from '../../../shared/services/producto.service';
 import { CategoriaProducto, Producto } from '../../../shared/interfaces/producto';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/api';
+
 
 @Component({
   selector: 'app-listado',

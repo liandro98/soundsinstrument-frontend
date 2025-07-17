@@ -13,7 +13,6 @@ import { MatInputModule } from '@angular/material/input'; // Importar para matIn
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductoDetallesComponent } from './pages/producto-detalles/producto-detalles.component'; // Para usar [(ngModel)] si es necesario
 import { CarouselModule } from 'primeng/carousel';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 

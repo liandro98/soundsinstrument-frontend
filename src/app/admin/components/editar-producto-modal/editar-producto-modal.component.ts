@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
-import { CategoriaProducto, Producto } from '../../../shared/interfaces/producto';
+import { Producto } from '../../../shared/interfaces/producto';
 import { ProductoService } from '../../../shared/services/producto.service';
 
 @Component({
