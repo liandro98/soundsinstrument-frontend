@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { RespuestaProducto } from '../../../shared/interfaces/respuestaProducto';
 import { Producto } from '../../../shared/interfaces/producto';
 import { Carrito } from '../../intefaces/carrito';
 import { Order } from '../../intefaces/orden';
